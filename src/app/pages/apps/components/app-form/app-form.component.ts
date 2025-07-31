@@ -1,6 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-form',
@@ -15,7 +16,7 @@ export class AppFormComponent {
   @Output() formSubmit = new EventEmitter<void>();
   @Input() editMode: boolean = false;
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private router: Router) {}
 
   onSubmit(): void {
     if (this.form.valid) {
@@ -27,11 +28,6 @@ export class AppFormComponent {
     this.location.back();
   }
 
-  constructor(private router: Router) {}
-
-  onClose() {
-    this.router.navigate(['/Apps']);
-  }
 
   onCancel() {
     this.router.navigate(['/Apps']);
