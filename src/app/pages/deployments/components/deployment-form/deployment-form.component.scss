@@ -1,0 +1,61 @@
+.app-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-color: #f7f8ff;
+  padding: 2rem;
+  padding-bottom: 240px;
+}
+
+.app-form-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 681px;
+  width: 100%;
+
+  .form-label {
+    font-weight: 500;
+    color: #2c2f4b;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    background-color: #f9fafa;
+    border: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+
+    &:focus {
+      box-shadow: none;
+      border-color: #4d6fff;
+    }
+  }
+
+  .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    height: 42px;
+  }
+
+  .btn-primary {
+    background-color: #4d6fff;
+    border-color: #4d6fff;
+
+    &:hover {
+      background-color: #3d5ddb;
+      border-color: #3d5ddb;
+    }
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+
+    &:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+  }
+}
