@@ -52,6 +52,22 @@
       }
     }
   }
+
+    .btn {
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background:#549eff;
+  border: none;
+  
+  &:hover {
+    background: #549eff;
+  
+  }
+}
   
   // Custom badge styles
   .badge {

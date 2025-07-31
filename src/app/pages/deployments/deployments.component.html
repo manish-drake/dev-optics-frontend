@@ -4,9 +4,11 @@
   <div class="main-content">
     <div class="content-header">
       <h2>Deployments</h2>
-      <button class="new-deployment-btn">
-        <span class="plus-icon">+</span>
-        New Deployment
+       <button 
+        class="btn btn-primary"
+        [routerLink]="['/deploy-form']">
+        <i class="bi bi-plus-circle me-2"></i>
+        Create Deployment
       </button>
     </div>
 
