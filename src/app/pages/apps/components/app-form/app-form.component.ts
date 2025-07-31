@@ -27,4 +27,13 @@ export class AppFormComponent {
     this.location.back();
   }
 
+  constructor(private router: Router) {}
+
+  onClose() {
+    this.router.navigate(['/Apps']);
+  }
+
+  onCancel() {
+    this.router.navigate(['/Apps']);
+  }
 }
