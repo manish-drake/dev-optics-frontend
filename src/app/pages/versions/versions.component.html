@@ -27,11 +27,12 @@
             </tr>
           </thead>
           <tbody>
+            @for(element of datasource; track element){
             <tr>
-              <td class="fw-semibold">E-Commerce Platform</td>
-              <td class="version-cell">v2.1.0</td>
-              <td>2024-07-15</td>
-              <td>Added user authentication</td>
+              <td class="fw-semibold">{{element.app}}</td>
+              <td class="version-cell">{{element.version}}</td>
+              <td>{{element.dt_started}}</td>
+              <td>{{element.description}}</td>
               <td>
                 <span class="badge status-active">Active</span>
               </td>
@@ -45,45 +46,7 @@
                   </button>
                 </div>
               </td>
-            </tr>
-            <tr>
-              <td class="fw-semibold">User Portal</td>
-              <td class="version-cell">v1.5.2</td>
-              <td>2024-07-20</td>
-              <td>Bug fixes and improvements</td>
-              <td>
-                <span class="badge status-deployed">Deployed</span>
-              </td>
-              <td>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-primary btn-sm" (click)="deployVersion()">
-                    Deploy
-                  </button>
-                  <button class="btn btn-secondary btn-sm" (click)="editVersion()">
-                    Edit
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="fw-semibold">Analytics Dashboard</td>
-              <td class="version-cell">v0.9.0-beta</td>
-              <td>2024-07-25</td>
-              <td>Initial beta release</td>
-              <td>
-                <span class="badge status-beta">Beta</span>
-              </td>
-              <td>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-primary btn-sm" (click)="deployVersion()">
-                    Deploy
-                  </button>
-                  <button class="btn btn-secondary btn-sm" (click)="editVersion()">
-                    Edit
-                  </button>
-                </div>
-              </td>
-            </tr>
+            </tr>}
           </tbody>
         </table>
       </div>

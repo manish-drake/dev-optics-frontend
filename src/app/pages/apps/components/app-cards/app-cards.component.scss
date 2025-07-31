@@ -1,0 +1,72 @@
+// app.component.scss
+.header-gradient {
+  background:#549eff;
+}
+
+.app-card {
+  border: none;
+  border-radius: 12px;
+
+  &:hover {
+   
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.app-description {
+  p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+.card-title {
+  color: #495057;
+  font-weight: 600;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background:#549eff;
+  border: none;
+
+  &:hover {
+    background:#3275cd;
+  }
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5em 1em;
+  border-radius: 50px;
+}
+
+.container-fluid {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+padding-top: 43px;
+}
+
+h2 {
+  color: #343a40;
+  font-weight: 600;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

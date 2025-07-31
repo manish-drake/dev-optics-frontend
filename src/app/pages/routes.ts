@@ -11,12 +11,16 @@ import { VersionFormPresenter } from "./versions/components/version-form/version
 export const PAGE_ROUTES: Route[] = [
     { path: 'Apps', component: AppsPresenter},
     { path: 'app-form', component: AppFormPresenter },
+    { path: 'edit-app/:id', component: AppFormPresenter},
     { path: 'change', component: ChangesPresenter},
     { path: 'change-form', component: ChangeFormPresenter},
+    { path: 'edit-change/:id', component: ChangeFormPresenter},
     { path: 'deployment', component: DeploymentsPresenter},
     { path: 'deploy-form', component: DeploymentFormPresenter},
+    { path: 'edit-deploy/:id', component: DeploymentFormPresenter},
     { path: 'versions', component: VersionsPresenter},
     { path: 'version-form', component: VersionFormPresenter},
+    { path: 'edit-version/:id', component: VersionFormPresenter},
 
 
      /**********************************************************************/

@@ -1,41 +1,41 @@
 <div class="app-form-container">
   <div class="app-form-card shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="fw-bold mb-0">Add New Application</h5>
+      <h5 class="fw-bold mb-0"> {{ editMode ? 'Update Application' : 'Add New Application' }}</h5>
       <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
 
     <hr />
 
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <input type="text" class="form-control" id="appName" placeholder="Enter application name" />
+        <input type="text" formControlName="app" class="form-control" id="appName" placeholder="Enter application name" />
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+        <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
       </div>
 
       <div class="mb-3">
         <label for="techStack" class="form-label">Tech Stack</label>
-        <input type="text" class="form-control" id="techStack" placeholder="Enter tech stack" />
+        <input formControlName="tech_stack" type="text" class="form-control" id="techStack" placeholder="Enter tech stack" />
       </div>
 
       <div class="mb-3">
         <label for="githubRepo" class="form-label">GitHub Repository</label>
-        <input type="url" class="form-control" id="githubRepo" placeholder="Enter GitHub URL" />
+        <input type="url" formControlName="github_repo" class="form-control" id="githubRepo" placeholder="Enter GitHub URL" />
       </div>
 
       <div class="mb-4">
         <label for="dockerRepo" class="form-label">Docker Repository</label>
-        <input type="text" class="form-control" id="dockerRepo" placeholder="Enter Docker repo" />
+        <input type="text" formControlName="docker_repo" class="form-control" id="dockerRepo" placeholder="Enter Docker repo" />
       </div>
 
       <div class="d-flex justify-content-center gap-3">
-        <button type="button" class="btn btn-secondary px-4">Cancel</button>
-        <button type="submit" class="btn btn-primary px-4">Save Application</button>
+        <button type="button" class="btn btn-secondary px-4" (click)="onClose()">Cancel</button>
+        <button type="submit" class="btn btn-primary px-4">{{ editMode ? 'Update Application' : 'Save Application' }}</button>
       </div>
     </form>
   </div>
