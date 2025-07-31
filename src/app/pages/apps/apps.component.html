@@ -1,21 +1,11 @@
 <!-- app.component.html -->
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-10">
 
- <!-- <div class="header-gradient py-4 mb-4">
-    <div class="container">
-      <h1 class="text-white text-center mb-0">
-        <i class="bi bi-rocket-takeoff me-2"></i>
-      Apps
-      </h1>
-    </div>
-  </div> -->
   <!-- Main Content -->
   <div class="container ">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mb-0">Applications</h2>
-      <button 
-        class="btn btn-primary"
-        (click)="addNewApp()">
+      <button class="btn btn-primary" (click)="addNewApp()">
         <i class="bi bi-plus-circle me-2"></i>
         Add New App
       </button>
@@ -24,22 +14,24 @@
     <!-- Applications Grid -->
     <div class="row g-4">
       <!-- E-Commerce Platform -->
-      <div class="col-lg-4 col-md-6">
+       @for(item of datasource; track item){
+ <div class="col-lg-4 col-md-6">
         <div class="card h-100 shadow-sm app-card">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-3">
-              <h5 class="card-title mb-0">E-Commerce Platform</h5>
+              <h5 class="card-title mb-0">{{item.app}} </h5>
               <span class="badge bg-success">Active</span>
             </div>
-            
+
             <!-- Description -->
             <div class="app-description mb-4">
               <p class="text-muted mb-0">
-                A comprehensive online shopping platform with product catalog, shopping cart, payment integration, and order management system.
+              {{item.description}}
+                
               </p>
             </div>
           </div>
-          
+
           <div class="card-footer bg-transparent">
             <div class="d-flex gap-2">
               <button class="btn btn-primary btn-sm" (click)="viewVersions()">
@@ -55,107 +47,9 @@
           </div>
         </div>
       </div>
-
-      <!-- User Management Portal -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 shadow-sm app-card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <h5 class="card-title mb-0">User Management Portal</h5>
-              <span class="badge bg-success">Active</span>
-            </div>
-            
-            <!-- Description -->
-            <div class="app-description mb-4">
-              <p class="text-muted mb-0">
-                Centralized user administration system for managing user accounts, roles, permissions, and access control across multiple applications.
-              </p>
-            </div>
-          </div>
-          
-          <div class="card-footer bg-transparent">
-            <div class="d-flex gap-2">
-              <button class="btn btn-primary btn-sm" (click)="viewVersions()">
-                View Versions
-              </button>
-              <button class="btn btn-secondary btn-sm" (click)="editApp()">
-                Edit
-              </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteApp()">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Analytics Dashboard -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 shadow-sm app-card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <h5 class="card-title mb-0">Analytics Dashboard</h5>
-              <span class="badge bg-secondary">Inactive</span>
-            </div>
-            
-            <!-- Description -->
-            <div class="app-description mb-4">
-              <p class="text-muted mb-0">
-                Advanced data visualization and reporting dashboard with real-time metrics, custom charts, and business intelligence insights.
-              </p>
-            </div>
-          </div>
-          
-          <div class="card-footer bg-transparent">
-            <div class="d-flex gap-2">
-              <button class="btn btn-primary btn-sm" (click)="viewVersions()">
-                View Versions
-              </button>
-              <button class="btn btn-secondary btn-sm" (click)="editApp()">
-                Edit
-              </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteApp()">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card h-100 shadow-sm app-card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <h5 class="card-title mb-0">Analytics Dashboard</h5>
-              <span class="badge bg-secondary">Inactive</span>
-            </div>
-            
-            <!-- Description -->
-            <div class="app-description mb-4">
-              <p class="text-muted mb-0">
-                Advanced data visualization and reporting dashboard with real-time metrics, custom charts, and business intelligence insights.
-              </p>
-            </div>
-          </div>
-          
-          <div class="card-footer bg-transparent">
-            <div class="d-flex gap-2">
-              <button class="btn btn-primary btn-sm" (click)="viewVersions()">
-                View Versions
-              </button>
-              <button class="btn btn-secondary btn-sm" (click)="editApp()">
-                Edit
-              </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteApp()">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
+       }
+     
     </div>
+    
   </div>
 </div>

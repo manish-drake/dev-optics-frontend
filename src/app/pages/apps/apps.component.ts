@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
   selector: 'app-apps',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './apps.component.html',
   styleUrl: './apps.component.scss'
 })
 export class AppsComponent {
+
+  @Input() datasource: any;
+
+  
 addNewApp() {
 throw new Error('Method not implemented.');
 }

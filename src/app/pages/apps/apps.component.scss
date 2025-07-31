@@ -1,15 +1,14 @@
 // app.component.scss
 .header-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:#549eff;
 }
 
 .app-card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   border: none;
   border-radius: 12px;
 
   &:hover {
-    transform: translateY(-5px);
+   
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
   }
 }
@@ -32,12 +31,11 @@
 }
 
 .btn-primary {
-  background:#5a6fd8;
+  background:#549eff;
   border: none;
 
   &:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    transform: translateY(-1px);
+    background:#3275cd;
   }
 }
 
@@ -60,6 +58,7 @@
 .container-fluid {
   background-color: #f8f9fa;
   min-height: 100vh;
+padding-top: 90px;
 }
 
 h2 {

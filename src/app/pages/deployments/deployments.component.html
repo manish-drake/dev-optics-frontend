@@ -1,1 +1,58 @@
-<h1>deployment is working</h1>
+<div class="deployments-container">
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="content-header">
+      <h2>Deployments</h2>
+      <button class="new-deployment-btn">
+        <span class="plus-icon">+</span>
+        New Deployment
+      </button>
+    </div>
+
+    <!-- Deployments Table -->
+    <div class="table-container">
+      <table class="deployments-table">
+        <thead>
+          <tr>
+            <th>App</th>
+            <th>Version</th>
+            <th>Deployed At</th>
+            <th>Git Tag</th>
+            <th>Docker Tag</th>
+            <th>Change Log</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="app-name">E-Commerce Platform</td>
+            <td class="version">v2.1.0</td>
+            <td class="deployed-at">2024-07-30 14:30</td>
+            <td class="git-tag">release-2.1.0</td>
+            <td class="docker-tag">ecommerce:2.1.0</td>
+            <td class="change-log">
+              <button class="view-log-btn">View Log</button>
+            </td>
+            <td class="actions">
+              <button class="rollback-btn">Rollback</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="app-name">User Portal</td>
+            <td class="version">v1.5.2</td>
+            <td class="deployed-at">2024-07-29 09:15</td>
+            <td class="git-tag">hotfix-1.5.2</td>
+            <td class="docker-tag">user-portal:1.5.2</td>
+            <td class="change-log">
+              <button class="view-log-btn">View Log</button>
+            </td>
+            <td class="actions">
+              <button class="rollback-btn">Rollback</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

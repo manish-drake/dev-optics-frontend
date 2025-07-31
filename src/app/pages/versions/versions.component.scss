@@ -1,9 +1,9 @@
 .header-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #549eff;
 }
 
 .table-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: #549eff!important;
 }
 
 .table-header th {
@@ -79,12 +79,12 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:#549eff;
   border: none;
   
   &:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    transform: translateY(-1px);
+    background: #549eff;
+  
   }
 }
 
@@ -94,7 +94,7 @@
   
   &:hover {
     background-color: #5a6268;
-    transform: translateY(-1px);
+   
   }
 }
 
@@ -107,6 +107,7 @@
 .container-fluid {
   background-color: #f8f9fa;
   min-height: 100vh;
+  padding-top: 90px;
 }
 
 h2 {
