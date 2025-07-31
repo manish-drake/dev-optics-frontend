@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center align-items-center gap-5 p-3  bg-light">
+
+ <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'Apps',
+      'btn-light': activeTab !== 'Apps'
+    }"
+    (click)="setActiveTab('Apps')"
+  >
+    Apps
+  </button>
+
+   <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'versions',
+      'btn-light': activeTab !== 'versions'
+    }"
+    (click)="setActiveTab('versions')"
+  >
+    Versions
+  </button>
+
+   <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'deployment',
+      'btn-light': activeTab !== 'deployment'
+    }"
+    (click)="setActiveTab('deployment')"
+  >
+    Deployment
+  </button>
+
+   <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'change',
+      'btn-light': activeTab !== 'change'
+    }"
+    (click)="setActiveTab('change')"
+  >
+    Changes
+  </button>
+    
+ 
+</div>

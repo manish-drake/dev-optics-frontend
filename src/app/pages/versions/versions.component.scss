@@ -1,0 +1,136 @@
+.header-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.table-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.table-header th {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  border: none !important;
+  padding: 1rem !important;
+  background: transparent !important;
+}
+
+.table-header th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.table-header th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.table {
+  td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-top: 1px solid #e9ecef;
+    
+    &.fw-semibold {
+      color: #495057;
+      font-weight: 600;
+    }
+  }
+  
+  tbody tr {
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
+
+.version-cell {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  font-weight: 500;
+  
+  &.status-active {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  &.status-deployed {
+    background-color: #20c997;
+    color: white;
+  }
+  
+  &.status-beta {
+    background-color: #fd7e14;
+    color: white;
+  }
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  
+  &:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+  }
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.container-fluid {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #343a40;
+  font-weight: 600;
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .d-flex.gap-2 {
+    flex-direction: column;
+    gap: 0.25rem !important;
+    
+    .btn {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+  
+  .badge {
+    font-size: 0.65rem;
+  }
+}

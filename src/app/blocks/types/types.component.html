@@ -1,0 +1,118 @@
+<form #typesForm="ngForm">
+  <div class="p-1">
+    <label>{{ datasource.typeName }} </label>
+    <div class="form-group">
+      <input
+        type="text"
+        #newType
+        class="form-control"
+        placeholder="Add New Type"
+        name="newType"
+        required
+        (keyup)="checkDuplicates(newType.value, datasource.existingTypes)"
+        [(ngModel)]="datasource.newType"
+      />
+      <div *ngIf="checkDuplicateResult.length > 0">
+        Matching types:
+        <span style="color: blue; font-style: italic">{{
+          checkDuplicateResult
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="newType.value.length > 0 && newType.value === checkDuplicateResult"
+      style="height: 30px; text-align: center; line-height: 30px"
+    >
+      {{ checkDuplicateResult }} Already Exists
+    </div>
+    <div class="float-right pl-1 pb-1 pt-1 pr-0">
+      <!-- <button type="button" class="btn btn-primary"
+          (click)="saveMetaType();addRow( type, $event)">Save</button> -->
+      <div class="form-group" *ngIf="datasource.id">
+        <div class="float-right">
+          <button
+            [disabled]="checkValue()"
+            class="btn btn-primary mr-1"
+            (click)="save.emit()"
+            rippleEffect
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="cancel.emit()"
+            rippleEffect
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="!datasource.id">
+        <div class="float-right">
+          <button
+            [disabled]="
+              !typesForm.valid || newType.value === checkDuplicateResult
+            "
+            type="submit"
+            class="btn btn-primary mr-1"
+            (click)="save.emit()"
+            rippleEffect
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            rippleEffect
+            (click)="cancel.emit()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <form #typesForm="ngForm">
+    <label>{{datasource.typeName}} Type</label>
+    <div class="form-group">
+        <input type="text"
+            #newType
+            class="form-control"
+            placeholder="Add New Type"
+            name="newType"
+            required
+            (keyup)="checkDuplicates(newType.value, datasource.existingTypes)"
+            [(ngModel)]="datasource.newType">
+        <div *ngIf="checkDuplicateResult.length > 0">
+            Matching types:
+            <span style="color: blue; font-style: italic;">{{ checkDuplicateResult }}</span>
+        </div>
+    </div>
+    <div class="alert alert-danger"
+        role="alert"
+        *ngIf="newType.value.length>0 && newType.value===checkDuplicateResult"
+        style="height: 30px; text-align: center;line-height:30px">
+        {{ checkDuplicateResult }} Already Exists
+    </div>
+    <div class="float-right mt-2">
+        <div class="form-group"
+            >
+            <div class="float-right ">
+                <button [disabled]="(!typesForm.valid) || (newType.value==checkDuplicateResult)"
+                    type="submit"
+                    class="btn btn-primary mr-1 mt-1"
+                    (click)="save.emit()"
+                    rippleEffect>Save</button>
+                <button type="button"
+                    class="btn btn-outline-danger mt-1"
+                    rippleEffect
+                    (click)="cancel.emit()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form> -->
