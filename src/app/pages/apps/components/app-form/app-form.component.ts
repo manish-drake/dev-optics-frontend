@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './app-form.component.scss'
 })
 export class AppFormComponent {
+onClose() {
+throw new Error('Method not implemented.');
+}
 
 }
