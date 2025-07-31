@@ -1,1 +1,59 @@
-<p>change-form works!</p>
+<div class="app-form-container">
+  <div class="app-form-card shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="fw-bold mb-0">Create Log</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+    </div>
+
+    <hr />
+
+    <form>
+      <div class="mb-3">
+        <label for="appName" class="form-label">App Name</label>
+        <input type="text" class="form-control" id="appName" placeholder="Enter application name" />
+      </div>
+      
+      <div class="mb-3">
+        <label for="version" class="form-label">Version</label>
+        <input type="text" class="form-control" id="version" placeholder="Enter version" />
+      </div>
+
+<div class="mb-3">
+        <label for="dtt_change" class="form-label">dtt_change</label>
+        <input type="text" class="form-control" id="dtt_change" placeholder="Enter dtt_change" />
+      </div>
+
+
+      <div class="mb-3">
+        <label for="change_title" class="form-label">change_title</label>
+        <input type="text" class="form-control" id="change_title" placeholder="Enter change_title" />
+      </div>
+
+
+
+      <div class="mb-3">
+        <label for="change_desc" class="form-label">Description</label>
+        <textarea class="form-control" id="change_desc" rows="3" placeholder="Enter description"></textarea>
+      </div>
+
+
+         <div class="mb-3">
+        <label for="category" class="form-label">category</label>
+        <input type="text" class="form-control" id="category" placeholder="Enter category" />
+      </div>
+         <div class="mb-3">
+        <label for="dev" class="form-label">Developer</label>
+        <input type="text" class="form-control" id="dev" placeholder="Enter dev" />
+      </div>
+  <div class="mb-3">
+        <label for="image_url" class="form-label">image_url</label>
+        <input type="file" class="form-control" id="dev" placeholder="Upload image_url" />
+      </div>
+
+      <div class="d-flex justify-content-center gap-3">
+        <button type="button" class="btn btn-secondary px-4 " (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary px-4">Save </button>
+      </div>
+    </form>
+  </div>
+</div>

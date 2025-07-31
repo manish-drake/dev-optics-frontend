@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-version-form',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './version-form.component.scss'
 })
 export class VersionFormComponent {
-
+constructor(private router: Router) {}
+  
+    onClose() {
+      this.router.navigate(['/versions']);
+    }
+  
+    onCancel() {
+      this.router.navigate(['/versions']);
+    }
 }

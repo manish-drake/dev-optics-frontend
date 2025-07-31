@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-form',
@@ -8,8 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './app-form.component.scss'
 })
 export class AppFormComponent {
-onClose() {
-throw new Error('Method not implemented.');
-}
 
+  constructor(private router: Router) {}
+
+  onClose() {
+    this.router.navigate(['/Apps']);
+  }
+
+  onCancel() {
+    this.router.navigate(['/Apps']);
+  }
 }
