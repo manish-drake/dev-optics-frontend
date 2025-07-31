@@ -14,7 +14,7 @@ export class ModelService {
   constructor(private httpClient: HttpClient) { }
 
   getApps(): Observable<AppModel[]>{
-    return this.httpClient.get<AppModel[]>(`${this.BaseUrl}/apps`);
+    return this.httpClient.get<AppModel[]>(`${this.BaseUrl}/apps/`);
   }
 
 }
