@@ -188,3 +188,33 @@
     }
   }
 }
+.changes-container {
+  .card-header {
+    .btn-icon {
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 1.25rem;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .btn-icon:hover {
+      color: #000;
+    }
+
+    .dropdown-menu {
+      min-width: 120px;
+      font-size: 0.875rem;
+    }
+
+    .dropdown-item {
+      cursor: pointer;
+    }
+
+    .dropdown-item.text-danger:hover {
+      background-color: rgba(220, 53, 69, 0.1);
+    }
+  }
+}
+

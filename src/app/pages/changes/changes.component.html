@@ -1,180 +1,80 @@
-<div class="changes-container"> <!-- Main Content -->
-  <div class="container">
-    <!-- Content Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="h3 mb-0 fw-bold text-dark">Change Management</h2>
-       <button 
-        class="btn btn-primary"
-        [routerLink]="['/change-form']">
-        <i class="bi bi-plus-circle me-2"></i>
-        Create Log
-      </button>
+<div class="changes-container">
+    <div class="container">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0 fw-bold text-dark">Change Management</h2>
+            <button class="btn btn-primary" [routerLink]="['/change-form']">
+                <i class="bi bi-plus-circle me-2"></i>
+                Create Log
+            </button>
+        </div>
+
+        <!-- Change Cards Grid -->
+        <div class="row g-4">
+            <!-- Repeatable Card -->
+            <div class="col-lg-6 col-xl-6">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">User Authentication System</h5>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success me-2">Feature</span>
+
+                            <!-- 3-dot dropdown -->
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-icon" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="#">
+                                            <i class="bi bi-trash me-2"></i>
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text text-muted small mb-3">
+                            Implementation of OAuth 2.0 authentication system with multi-factor authentication support.
+                            Includes JWT token management and session handling.
+                        </p>
+
+                        <div class="mb-3">
+                            <div class="row small">
+                                <div class="col-4 text-muted fw-medium">AppName:</div>
+                                <div class="col-8 fw-semibold">Fullstack</div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-4 text-muted fw-medium">Developer:</div>
+                                <div class="col-8 fw-semibold">Sarah Johnson</div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-4 text-muted fw-medium">Status:</div>
+                                <div class="col-8 fw-semibold text-success">Completed</div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-4 text-muted fw-medium">Date:</div>
+                                <div class="col-8 fw-semibold">2024-07-28</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-light border border-2 border-dashed rounded d-flex align-items-center justify-content-center"
+                            style="height: 120px;">
+                            <span class="text-muted fst-italic small">Authentication Flow Diagram</span>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
     </div>
-
-    <!-- Changes Grid -->
-    <div class="row g-4">
-      <!-- User Authentication System Card -->
-      <div class="col-lg-6 col-xl-6">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">User Authentication System</h5>
-            <span class="badge bg-success">Feature</span>
-          </div>
-          <div class="card-body">
-            <p class="card-text text-muted small mb-3">
-              Implementation of OAuth 2.0 authentication system with multi-factor authentication support. 
-              Includes JWT token management and session handling.
-            </p>
-            
-            <div class="mb-3">
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Developer:</div>
-                <div class="col-8 fw-semibold">Sarah Johnson</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Status:</div>
-                <div class="col-8 fw-semibold text-success">Completed</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Date:</div>
-                <div class="col-8 fw-semibold">2024-07-28</div>
-              </div>
-            </div>
-
-            <div class="bg-light border border-2 border-dashed rounded d-flex align-items-center justify-content-center" 
-                 style="height: 120px;">
-              <span class="text-muted fst-italic small">Authentication Flow Diagram</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Payment Gateway Fix Card -->
-      <div class="col-lg-6 col-xl-6">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Payment Gateway Fix</h5>
-            <span class="badge bg-danger">Bug Fix</span>
-          </div>
-          <div class="card-body">
-            <p class="card-text text-muted small mb-3">
-              Fixed critical issue with payment processing timeout. Improved error handling and 
-              added retry mechanism for failed transactions.
-            </p>
-            
-            <div class="mb-3">
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Developer:</div>
-                <div class="col-8 fw-semibold">Mike Chen</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Status:</div>
-                <div class="col-8 fw-semibold text-primary">Deployed</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Date:</div>
-                <div class="col-8 fw-semibold">2024-07-30</div>
-              </div>
-            </div>
-
-            <div class="bg-dark rounded p-2">
-              <code class="text-light small">
-                // Fixed timeout handling<br>
-                const timeout = 30000;<br>
-                await paymentAPI.process(data, &#123; timeout &#125;);
-              </code>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Database Optimization Card -->
-      <div class="col-lg-6 col-xl-6">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Database Optimization</h5>
-            <span class="badge bg-warning text-dark">Refactoring</span>
-          </div>
-          <div class="card-body">
-            <p class="card-text text-muted small mb-3">
-              Optimized database queries and added proper indexing. Reduced average query time by 65% 
-              and improved overall application performance.
-            </p>
-            
-            <div class="mb-3">
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Developer:</div>
-                <div class="col-8 fw-semibold">Alex Rodriguez</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Status:</div>
-                <div class="col-8 fw-semibold text-warning">Testing</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Date:</div>
-                <div class="col-8 fw-semibold">2024-07-29</div>
-              </div>
-            </div>
-
-            <div class="row g-2">
-              <div class="col-6">
-                <div class="bg-light rounded p-2 text-center">
-                  <div class="small text-muted">Query Time:</div>
-                  <div class="fw-bold text-success">-65%</div>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="bg-light rounded p-2 text-center">
-                  <div class="small text-muted">DB Load:</div>
-                  <div class="fw-bold text-success">-40%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Real-time Analytics Card -->
-      <div class="col-lg-6 col-xl-6">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Real-time Analytics</h5>
-            <span class="badge bg-success">Feature</span>
-          </div>
-          <div class="card-body">
-            <p class="card-text text-muted small mb-3">
-              Added real-time analytics dashboard with WebSocket integration. Provides live metrics 
-              and user activity tracking with customizable widgets.
-            </p>
-            
-            <div class="mb-3">
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Developer:</div>
-                <div class="col-8 fw-semibold">Emma Wilson</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Status:</div>
-                <div class="col-8 fw-semibold text-info">In Progress</div>
-              </div>
-              <div class="row small">
-                <div class="col-4 text-muted fw-medium">Date:</div>
-                <div class="col-8 fw-semibold">2024-07-31</div>
-              </div>
-            </div>
-
-            <div class="position-relative">
-              <div class="progress" style="height: 8px;">
-                <div class="progress-bar bg-success" role="progressbar" 
-                     style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                </div>
-              </div>
-              <small class="position-absolute top-0 end-0 text-muted fw-semibold" style="transform: translateY(-1.5rem);">
-                75% Complete
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
