@@ -12,7 +12,7 @@
     </div>
 
     <!-- Applications Table -->
-    <app-app-cards [datasource]="datasource"></app-app-cards>
+    <app-app-cards [datasource]="datasource" (appdelete)="onDelete($event)"></app-app-cards>
    
   </div>
 </div>

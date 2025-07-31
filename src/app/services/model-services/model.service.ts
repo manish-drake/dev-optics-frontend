@@ -61,6 +61,13 @@ export class ModelService {
     return this.httpClient.put<AppModel>(`${this.BaseUrl}/apps/${id}`, appData);
   }
 
+
+  // ================================== Delete API ================================== //
+
+
+  deleteApp(id: number): Observable<AppModel> {
+    return this.httpClient.delete<AppModel>(`${this.BaseUrl}/apps/${id}`);
+  }
  
 
 }

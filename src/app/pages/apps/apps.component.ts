@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppCardsComponent } from "./components/app-cards/app-cards.component";
 
@@ -14,10 +14,15 @@ import { AppCardsComponent } from "./components/app-cards/app-cards.component";
 export class AppsComponent {
 
   @Input() datasource: any;
+  @Output() deleteApp = new EventEmitter<number>()
 
   
 addNewApp() {
 throw new Error('Method not implemented.');
+}
+onDelete(id: number){
+  this.deleteApp.emit(id)
+  console.log("Delete Child Id", id)
 }
 
 editApp() {
