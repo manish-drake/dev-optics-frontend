@@ -51,6 +51,18 @@
   >
     Changes
   </button>
+    <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'milestones',
+      'btn-light': activeTab !== 'milestones'
+    }"
+    (click)="setActiveTab('milestones')"
+  >
+    Milestones
+  </button>
     
  
 </div>
