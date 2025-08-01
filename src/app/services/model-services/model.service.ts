@@ -29,7 +29,7 @@ export class ModelService {
   }
 
   getSingleVersion(id: number): Observable<VersionModel>{
-    return this.httpClient.get<VersionModel>(`${this.BaseUrl}/version/${id}`)
+    return this.httpClient.get<VersionModel>(`${this.BaseUrl}/versions/${id}`)
   }
 
   getDeploy(): Observable<DeploymentModel[]>{
@@ -37,7 +37,7 @@ export class ModelService {
   }
 
   getSingleDeploy(id: number): Observable<DeploymentModel>{
-    return this.httpClient.get<DeploymentModel>(`${this.BaseUrl}/deployment/${id}`)
+    return this.httpClient.get<DeploymentModel>(`${this.BaseUrl}/deployments/${id}`)
   }
 
   getChange(): Observable<ChangeModel[]>{
@@ -45,7 +45,7 @@ export class ModelService {
   }
 
   getSingleChange(id: number): Observable<ChangeModel>{
-    return this.httpClient.get<ChangeModel>(`${this.BaseUrl}/change/${id}`)
+    return this.httpClient.get<ChangeModel>(`${this.BaseUrl}/changes/${id}`)
   }
 
 
@@ -55,10 +55,26 @@ export class ModelService {
     return this.httpClient.post<AppModel>(`${this.BaseUrl}/apps/`, appData);
   }
 
+  createVersion(versionData: VersionModel): Observable<VersionModel> {
+    return this.httpClient.post<VersionModel>(`${this.BaseUrl}/versions/`, versionData)
+  }
+
+  createDeploy(deployData: DeploymentModel): Observable<DeploymentModel> {
+    return this.httpClient.post<DeploymentModel>(`${this.BaseUrl}/deployments/`, deployData)
+  }
+
+  createChange(changeData: ChangeModel): Observable<ChangeModel> {
+    return this.httpClient.post<ChangeModel>(`${this.BaseUrl}/changes/`, changeData)
+  }
+
   // ================================== PUT API ================================== //
 
   updateApp(id: number, appData: AppModel): Observable<AppModel> {
     return this.httpClient.put<AppModel>(`${this.BaseUrl}/apps/${id}`, appData);
+  }
+
+  updateVersion(id: number, versionData: VersionModel): Observable<VersionModel> {
+    return this.httpClient.put<VersionModel>(`${this.BaseUrl}/versions/${id}`, versionData);
   }
 
 
@@ -67,6 +83,10 @@ export class ModelService {
 
   deleteApp(id: number): Observable<AppModel> {
     return this.httpClient.delete<AppModel>(`${this.BaseUrl}/apps/${id}`);
+  }
+
+  deleteVersion(id: number): Observable<VersionModel>{
+    return this.httpClient.delete<VersionModel>(`${this.BaseUrl}/versions/${id}`)
   }
  
 

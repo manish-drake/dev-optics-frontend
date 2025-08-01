@@ -13,43 +13,6 @@
     </div>
 
     <!-- Versions Table -->
-    <div class="card shadow-sm">
-      <div class="table-responsive">
-        <table class="table table-hover mb-0">
-          <thead class="table-header">
-            <tr>
-              <th scope="col">App</th>
-              <th scope="col">Version</th>
-              <th scope="col">Started</th>
-              <th scope="col">Description</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(element of datasource; track element){
-            <tr>
-              <td class="fw-semibold">{{element.app}}</td>
-              <td class="version-cell">{{element.version}}</td>
-              <td>{{element.dt_started}}</td>
-              <td>{{element.description}}</td>
-              <td>
-                <span class="badge status-active">Active</span>
-              </td>
-              <td>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-primary btn-sm" (click)="deployVersion()">
-                    Deploy
-                  </button>
-                  <button class="btn btn-secondary btn-sm" (click)="editVersion()">
-                    Edit
-                  </button>
-                </div>
-              </td>
-            </tr>}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <app-version-cards [datasource]="datasource" (versionDelete)="onDelete($event)"></app-version-cards>
   </div>
 </div>
