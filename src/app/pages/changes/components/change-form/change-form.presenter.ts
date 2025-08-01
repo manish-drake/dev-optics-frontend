@@ -1,13 +1,90 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChangeFormComponent } from "./change-form.component";
+import { CategoryEnum, ChangeModel } from '../../../../services/model-interface/interfaces';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ModelService } from '../../../../services/model-services/model.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-change-form-presenter',
   standalone: true,
   imports: [ChangeFormComponent],
-  template: `<app-change-form></app-change-form>`,
+  template: `<app-change-form [form]="form" [app]="appName"
+   [editMode]="isEditMode" (formSubmit)="submit()" [category]="categoryList"></app-change-form>`,
   styleUrl: './change-form.component.scss'
 })
-export class ChangeFormPresenter {
+export class ChangeFormPresenter implements OnInit {
+
+  categoryList: string[] = [];
+  appName: string[] = [];
+  public form!: FormGroup;
+  public changeId: number | null = null;
+  public isEditMode = false;
+
+  constructor(private modelService: ModelService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.categoryList = Object.values(CategoryEnum);
+    this.buildForm();
+
+    this.route.params.subscribe((params) => {
+      this.changeId = params['id'];
+      this.isEditMode = !!this.changeId;
+      if(this.isEditMode && this.changeId){
+        this.modelService.getSingleChange(this.changeId).subscribe({
+          next: (data) => {
+            this.form.patchValue(data);
+          },
+          error: (err) => console.log('Single data get error:', err)
+        })
+      }
+    })
+
+    this.modelService.getAppNames().subscribe({
+      next: (data) => {
+        this.appName = data;
+      }
+    })
+
+  }
+  private buildForm(): void {
+    this.form = this.fb.group({
+      id: [''],
+      app: [''],
+      version: [''],
+      dtt_change: [''],
+      change_title: [''],
+      change_desc: [''],
+      category: [''],
+      dev: [''],
+      image_url: ['']
+    })
+  }
+
+  submit() {
+    if(this.form.invalid) return;
+    const changeData: ChangeModel = this.form.value;
+
+    if(this.isEditMode){
+      this.modelService.updateChange(changeData.id, changeData).subscribe({
+        next: () =>{
+          console.log('Update successfully')
+          this.router.navigate(['/change']);
+        },
+        error: (err) => console.log('Update Error:', err)
+      })
+    } else {
+      this.modelService.createChange(changeData).subscribe({
+        next:()=>{
+          console.log('Created successfully');
+          this.form.reset();
+          this.router.navigate(['/change'])
+        }
+      })
+    }
+  }
 
 }

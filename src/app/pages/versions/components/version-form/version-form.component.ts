@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class VersionFormComponent {
 
+  @Input() app : any;
+
   @Input() form!: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
   @Input() editMode: boolean = false;

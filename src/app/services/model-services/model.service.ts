@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
-import { Observable } from 'rxjs';
-import { AppModel, ChangeModel, DeploymentModel, VersionModel } from '../model-interface/interfaces';
+import { map, Observable } from 'rxjs';
+import { AppModel, ChangeModel, DeploymentModel,  MilestoneModel, VersionModel } from '../model-interface/interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ModelService {
 
   // ================================== GET API ================================== //
 
-  getApps(): Observable<AppModel[]>{
+  getApps(): Observable<AppModel[]> {
     return this.httpClient.get<AppModel[]>(`${this.BaseUrl}/apps/`);
   }
 
@@ -24,28 +24,36 @@ export class ModelService {
     return this.httpClient.get<AppModel>(`${this.BaseUrl}/apps/${id}`);
   }
 
-  getVersion(): Observable<VersionModel[]>{
+  getVersion(): Observable<VersionModel[]> {
     return this.httpClient.get<VersionModel[]>(`${this.BaseUrl}/versions/`)
   }
 
-  getSingleVersion(id: number): Observable<VersionModel>{
+  getSingleVersion(id: number): Observable<VersionModel> {
     return this.httpClient.get<VersionModel>(`${this.BaseUrl}/versions/${id}`)
   }
 
-  getDeploy(): Observable<DeploymentModel[]>{
+  getDeploy(): Observable<DeploymentModel[]> {
     return this.httpClient.get<DeploymentModel[]>(`${this.BaseUrl}/deployments/`)
   }
 
-  getSingleDeploy(id: number): Observable<DeploymentModel>{
+  getSingleDeploy(id: number): Observable<DeploymentModel> {
     return this.httpClient.get<DeploymentModel>(`${this.BaseUrl}/deployments/${id}`)
   }
 
-  getChange(): Observable<ChangeModel[]>{
+  getChange(): Observable<ChangeModel[]> {
     return this.httpClient.get<ChangeModel[]>(`${this.BaseUrl}/changes/`)
   }
 
-  getSingleChange(id: number): Observable<ChangeModel>{
+  getSingleChange(id: number): Observable<ChangeModel> {
     return this.httpClient.get<ChangeModel>(`${this.BaseUrl}/changes/${id}`)
+  }
+
+  getMilestone(): Observable<MilestoneModel[]>{
+   return this.httpClient.get<MilestoneModel[]>(`${this.BaseUrl}/milestones/`)
+  }
+
+  getSingleMilestone(id: number): Observable<MilestoneModel>{
+    return this.httpClient.get<MilestoneModel>(`${this.BaseUrl}/milestones/${id}`)
   }
 
 
@@ -67,6 +75,10 @@ export class ModelService {
     return this.httpClient.post<ChangeModel>(`${this.BaseUrl}/changes/`, changeData)
   }
 
+  createMileStone(milestoneData: MilestoneModel): Observable<MilestoneModel> {
+    return this.httpClient.post<MilestoneModel>(`${this.BaseUrl}/milestones/`, milestoneData)
+  }
+
   // ================================== PUT API ================================== //
 
   updateApp(id: number, appData: AppModel): Observable<AppModel> {
@@ -75,6 +87,17 @@ export class ModelService {
 
   updateVersion(id: number, versionData: VersionModel): Observable<VersionModel> {
     return this.httpClient.put<VersionModel>(`${this.BaseUrl}/versions/${id}`, versionData);
+  }
+  updateDeploy(id: number, deployData: DeploymentModel): Observable<DeploymentModel> {
+    return this.httpClient.put<DeploymentModel>(`${this.BaseUrl}/deployments/${id}`, deployData);
+  }
+
+  updateChange(id: number, changeData: ChangeModel): Observable<ChangeModel>{
+    return this.httpClient.put<ChangeModel>(`${this.BaseUrl}/changes/${id}`, changeData)
+  }
+
+  updateMilestone(id: number, milestoneData: MilestoneModel): Observable<MilestoneModel>{
+    return this.httpClient.put<MilestoneModel>(`${this.BaseUrl}/milestones/${id}`, milestoneData)
   }
 
 
@@ -85,9 +108,24 @@ export class ModelService {
     return this.httpClient.delete<AppModel>(`${this.BaseUrl}/apps/${id}`);
   }
 
-  deleteVersion(id: number): Observable<VersionModel>{
+  deleteVersion(id: number): Observable<VersionModel> {
     return this.httpClient.delete<VersionModel>(`${this.BaseUrl}/versions/${id}`)
   }
- 
+
+  deleteDeploy(id: number): Observable<DeploymentModel> {
+    return this.httpClient.delete<DeploymentModel>(`${this.BaseUrl}/deployments/${id}`)
+  }
+
+  deleteChange(id: number): Observable<ChangeModel> {
+    return this.httpClient.delete<ChangeModel>(`${this.BaseUrl}/changes/${id}`)
+  }
+
+  // ================================== Get only One Item API ================================== //
+
+  getAppNames(): Observable<string[]> {
+    return this.httpClient.get<AppModel[]>(`${this.BaseUrl}/apps/`).pipe(
+      map((apps) => apps.map(app => app.app))
+    );
+  }
 
 }

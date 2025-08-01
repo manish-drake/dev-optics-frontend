@@ -1,45 +1,51 @@
 <div class="app-form-container">
   <div class="app-form-card shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="fw-bold mb-0"> Create Deployment</h5>
+      <h5 class="fw-bold mb-0">{{editMode ? 'Update Deployment': 'Create Deployment'}}</h5>
       <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
     </div>
 
     <hr />
 
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <input type="text" class="form-control" id="appName" placeholder="Enter application name" />
+        <select class="form-select" formControlName="app">
+          @for(name of app; track name){
+          <option [value]="name">
+            {{ name }}
+          </option>
+          }
+        </select>
       </div>
 
 
       <div class="mb-3">
         <label for="dtt_deploy" class="form-label">dtt_deploy</label>
-        <input type="date" class="form-control" id="dtt_deploy" placeholder="Enter dtt_deploy" />
+        <input type="datetime-local" formControlName="dtt_deploy" class="form-control" id="dtt_deploy" placeholder="Enter dtt_deploy" />
       </div>
 
       <div class="mb-3">
         <label for="version" class="form-label">version</label>
-        <input type="text" class="form-control" id="version" placeholder="Enter version" />
+        <input type="text" formControlName="version" class="form-control" id="version" placeholder="Enter version" />
       </div>
 
       <div class="mb-4">
         <label for="git_tag" class="form-label">git_tag</label>
-        <input type="text" class="form-control" id="git_tag" placeholder="Enter git_tag" />
+        <input type="text" formControlName="git_tag" class="form-control" id="git_tag" placeholder="Enter git_tag" />
       </div>
            <div class="mb-4">
         <label for="docker_tag" class="form-label">docker_tag</label>
-        <input type="text" class="form-control" id="docker_tag" placeholder="Enter docker_tag" />
+        <input type="text" formControlName="docker_tag" class="form-control" id="docker_tag" placeholder="Enter docker_tag" />
       </div>
            <div class="mb-4">
         <label for="change_log" class="form-label">change_log</label>
-        <input type="text" class="form-control" id="change_log" placeholder="Enter change_log" />
+        <input type="text" formControlName="change_log" class="form-control" id="change_log" placeholder="Enter change_log" />
       </div>
 
       <div class="d-flex justify-content-center gap-3">
         <button type="button" class="btn btn-secondary px-4" (click)="onCancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary px-4">Save </button>
+        <button type="submit" class="btn btn-primary px-4">{{editMode ? 'Update': 'Save'}} </button>
       </div>
     </form>
   </div>

@@ -1,1 +1,35 @@
-<p>deployment-cards works!</p>
+<div class="table-container">
+      <table class="deployments-table">
+        <thead>
+          <tr>
+            <th>App</th>
+            <th>Version</th>
+            <th>Deployed At</th>
+            <th>Git Tag</th>
+            <th>Docker Tag</th>
+            <th>Change Log</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(element of datasource; track element){
+             
+          <tr>
+            <td class="app-name">{{ element.app }}</td>
+            <td class="version"> {{ element.version }} </td>
+            <td class="deployed-at">{{ formatDateAndTime(element.dtt_deploy)  }}</td>
+            <td class="git-tag">{{ element.git_tag }}</td>
+            <td class="docker-tag">{{ element.docker_tag }}</td>
+            <td class="change-log">
+              {{element.change_log}}
+            </td>
+            <td class="actions d-flex align-items-center gap-2">
+             
+              <button class="btn btn-secondary" [routerLink]="['/edit-deploy', element.id]">Edit</button>
+               <button class="btn rollback-btn" (click)="onDeleteDeployment(element.id)">Delete</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>

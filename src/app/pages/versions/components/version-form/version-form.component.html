@@ -1,8 +1,15 @@
 <div class="app-form-container">
   <div class="app-form-card shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="fw-bold mb-0">{{editMode ? 'Update Version': 'Create Version'}}</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+      <h5 class="fw-bold mb-0">
+        {{ editMode ? "Update Version" : "Create Version" }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="onClose()"
+      ></button>
     </div>
 
     <hr />
@@ -10,44 +17,105 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <input type="text" formControlName="app" class="form-control" id="appName" placeholder="Enter application name" />
+        <select class="form-select" formControlName="app">
+          @for(name of app; track name){
+          <option [value]="name">
+            {{ name }}
+          </option>
+          }
+        </select>
       </div>
-         <div class="mb-3">
+      <div class="mb-3">
         <label for="version" class="form-label">Version</label>
-        <input type="text" formControlName="version" class="form-control" id="version" placeholder="Enter version" />
+        <input
+          type="text"
+          formControlName="version"
+          class="form-control"
+          id="version"
+          placeholder="Enter version"
+          autocomplete="off"
+        />
       </div>
 
       @if(editMode){
       <div class="mb-3">
         <label for="version" class="form-label">Major version change</label>
-        <input type="text" formControlName="delta_maj" class="form-control" id="majorVersion" placeholder="Enter version" />
+        <input
+          type="text"
+          formControlName="delta_maj"
+          class="form-control"
+          id="majorVersion"
+          autocomplete="off"
+        />
       </div>
 
-       <div class="mb-3">
+      <div class="mb-3">
         <label for="version" class="form-label">Minor version change</label>
-        <input type="text" formControlName="delta_min" class="form-control" id="minorVersion" placeholder="Enter version" />
+        <input
+          type="text"
+          formControlName="delta_min"
+          class="form-control"
+          id="minorVersion"
+          autocomplete="off"
+        />
       </div>
 
-       <div class="mb-3">
+      <div class="mb-3">
         <label for="version" class="form-label">Version</label>
-        <input type="text" formControlName="delta_pat" class="form-control" id="patchVersion" placeholder="Enter version" />
+        <input
+          type="text"
+          formControlName="delta_pat"
+          class="form-control"
+          id="patchVersion"
+          autocomplete="off"
+        />
       </div>
       }
-          <div class="mb-3">
-        <label for="dt_started" class="form-label">dt_started</label>
-        <input type="date" formControlName="dt_started" class="form-control" id="version" placeholder="Enter dt_started" />
+      <div class="mb-3">
+        <label for="dt_started" class="form-label">Date</label>
+        <input
+          type="date"
+          formControlName="dt_started"
+          class="form-control"
+          id="version"
+          placeholder="Enter dt_started"
+          autocomplete="off"
+        />
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" formControlName="description" id="description" rows="3" placeholder="Enter description"></textarea>
+        <textarea
+          class="form-control"
+          formControlName="description"
+          id="description"
+          rows="3"
+          placeholder="Enter description"
+          autocomplete="off"
+        ></textarea>
       </div>
 
-
+      <div class="form-check mb-3">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="current"
+          formControlName="current"
+        />
+        <label class="form-check-label" for="current">Current</label>
+      </div>
 
       <div class="d-flex justify-content-center gap-3">
-        <button type="button" class="btn btn-secondary px-4"(click)="onCancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary px-4">{{editMode ? 'Update version': 'Save version'}}</button>
+        <button
+          type="button"
+          class="btn btn-secondary px-4"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+          {{ editMode ? "Update" : "Save" }}
+        </button>
       </div>
     </form>
   </div>

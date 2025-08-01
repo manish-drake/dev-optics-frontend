@@ -40,10 +40,19 @@ export interface ChangeModel {
   dtt_change: string
   change_title: string
   change_desc: string
-  category: CategoryEnum
+  category: string
   dev: string
   image_url: string
-  id: 0
+  id: number
+}
+
+export interface MilestoneModel{
+    milestone: string
+    goal: string
+    dt_milestone: string
+    proj_ver: string
+    complete: true
+    id: number
 }
 
 export enum CategoryEnum {

@@ -1,42 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DeploymentCardsComponent } from "./components/deployment-cards/deployment-cards.component";
 
 @Component({
   selector: 'app-deployments',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DeploymentCardsComponent],
   templateUrl: './deployments.component.html',
   styleUrl: './deployments.component.scss'
 })
 export class DeploymentsComponent {
 
   @Input()  datasource: any;
+  @Output() deleteVersion =  new EventEmitter<number>()
 
 
-  formatDateAndTime(input: string): string {
-  const date = new Date(input);
-
-  if (isNaN(date.getTime())) {
-    return 'Invalid Date';
-  }
-
-  const datePart = date.toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-
-  const timePart = date.toLocaleTimeString('en-IN', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
-
-  return `${datePart} ${timePart}`;
+  onDelete(id: number) {
+   this.deleteVersion.emit(id);
 }
-
-
 
 
 }

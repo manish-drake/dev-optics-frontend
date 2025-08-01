@@ -13,6 +13,33 @@
     Apps
   </button>
 
+  <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'change',
+      'btn-light': activeTab !== 'change'
+    }"
+    (click)="setActiveTab('change')"
+  >
+    Changes
+  </button>
+
+     <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'milestones',
+      'btn-light': activeTab !== 'milestones'
+    }"
+    (click)="setActiveTab('milestones')"
+  >
+    Milestones
+  </button>
+    
+
    <button
 
     type="button"
@@ -25,6 +52,8 @@
   >
     Versions
   </button>
+
+    
 
    <button
 
@@ -39,30 +68,7 @@
     Deployment
   </button>
 
-   <button
-
-    type="button"
-    class="btn"
-    [ngClass]="{
-      'btn-primary text-white': activeTab === 'change',
-      'btn-light': activeTab !== 'change'
-    }"
-    (click)="setActiveTab('change')"
-  >
-    Changes
-  </button>
-    <button
-
-    type="button"
-    class="btn"
-    [ngClass]="{
-      'btn-primary text-white': activeTab === 'milestones',
-      'btn-light': activeTab !== 'milestones'
-    }"
-    (click)="setActiveTab('milestones')"
-  >
-    Milestones
-  </button>
-    
+ 
+ 
  
 </div>

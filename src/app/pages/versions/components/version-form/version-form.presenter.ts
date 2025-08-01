@@ -5,11 +5,12 @@ import { ModelService } from '../../../../services/model-services/model.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { VersionModel } from '../../../../services/model-interface/interfaces';
 
+
 @Component({
   selector: 'app-version-form-presenter',
   standalone: true,
   imports: [VersionFormComponent],
-  template: `<app-version-form [form]="form" [editMode]="isEditMode"
+  template: `<app-version-form [form]="form" [app]="appName" [editMode]="isEditMode"
       (formSubmit)="submit()"></app-version-form>`,
   styleUrl: './version-form.component.scss'
 })
@@ -18,6 +19,7 @@ export class VersionFormPresenter implements OnInit {
   public form!: FormGroup;
   public versionId: number | null = null;
   public isEditMode = false;
+  public appName: string[] = [];
 
   constructor(
     private modelService: ModelService,
@@ -42,6 +44,14 @@ export class VersionFormPresenter implements OnInit {
         })
       }
     })
+
+    this.modelService.getAppNames().subscribe({
+      next: (data) => {
+        this.appName = data
+      }
+    })
+
+    
 
   }
 

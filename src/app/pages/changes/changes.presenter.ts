@@ -7,7 +7,7 @@ import { ModelService } from '../../services/model-services/model.service';
   selector: 'app-changes-presenter',
   standalone: true,
   imports: [ChangesComponent],
-  template: `<app-changes [datasource]="ds"></app-changes>`,
+  template: `<app-changes [datasource]="ds" (deleteChange)="deleteChangeById($event)"></app-changes>`,
   styleUrl: './changes.component.scss'
 })
 export class ChangesPresenter implements OnInit {
@@ -27,6 +27,15 @@ export class ChangesPresenter implements OnInit {
         console.log("Changes List DS:", this.ds)
       }
     })
+  }
+
+  deleteChangeById(id: number){
+     this.modelService.deleteChange(id).subscribe({
+      next: (data) => {
+        console.log("Deleted successfully", data)
+      },
+      error: (err) => console.log('Delete Error :', err)
+     })
   }
 
 }
