@@ -8,6 +8,7 @@ import { ChangeFormPresenter } from "./changes/components/change-form/change-for
 import { DeploymentFormPresenter } from "./deployments/components/deployment-form/deployment-form.presenter";
 import { VersionFormPresenter } from "./versions/components/version-form/version-form.presenter";
 import { MilestonesPresenter } from "./milestones/milestones.presenter";
+import { MilestoneFormPresenter } from "./milestones/components/milestone-form/milestone-form.presenter";
 
 export const PAGE_ROUTES: Route[] = [
     { path: 'Apps', component: AppsPresenter},
@@ -22,7 +23,9 @@ export const PAGE_ROUTES: Route[] = [
     { path: 'versions', component: VersionsPresenter},
     { path: 'version-form', component: VersionFormPresenter},
     { path: 'edit-version/:id', component: VersionFormPresenter},
-     { path: 'milestones', component: MilestonesPresenter},
+    { path: 'milestones', component: MilestonesPresenter},
+    { path: 'milestone-form', component: MilestoneFormPresenter},
+    { path: 'edit-milestone/:id', component: MilestoneFormPresenter},
 
 
      /**********************************************************************/

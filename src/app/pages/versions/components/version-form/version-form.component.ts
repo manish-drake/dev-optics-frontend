@@ -2,6 +2,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-version-form',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class VersionFormComponent {
 
-  @Input() app : any;
+  @Input() app: any;
 
   @Input() form!: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
@@ -29,6 +30,19 @@ export class VersionFormComponent {
   }
 
   onCancel() {
-    this.router.navigate(['/versions']);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to Discard changes",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/versions']);
+      }
+    });
   }
 }

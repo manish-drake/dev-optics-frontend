@@ -51,7 +51,7 @@ export interface MilestoneModel{
     goal: string
     dt_milestone: string
     proj_ver: string
-    complete: true
+    complete: boolean
     id: number
 }
 

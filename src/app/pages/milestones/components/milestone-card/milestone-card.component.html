@@ -1,1 +1,58 @@
-<p>milestone-card works!</p>
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-bottom py-2 px-3">
+      <h6 class="mb-0 fw-semibold">All Milestones</h6>
+    </div>
+    <div class="card-body p-0">
+      
+      <!-- Milestone 1 - Completed -->
+
+      @for ( item of datasource; track $index){
+       <div class="milestone-item-sm">
+        <div class="d-flex align-items-start gap-2">
+          <!-- Status Icon -->
+          <button class="btn btn-link p-0 mt-1 status-btn">
+            <i class="bi bi-check-circle-fill text-success"></i>
+          </button>
+
+          <!-- Content -->
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <h6 class="mb-0 fw-semibold text-decoration-line-through text-muted small">
+                {{item.milestone}}
+              </h6>
+
+              @if(item.completed == true){
+              <span class="badge bg-success badge-sm">Completed</span>
+              } @else {
+                <span class="badge bg-primary badge-sm">In Progress</span>
+              }
+            </div>
+            
+            <p class="text-muted mb-2 small">{{ item.goal}}</p>
+            
+            <div class="d-flex align-items-center gap-3 text-muted" style="font-size: 0.75rem;">
+              <div class="d-flex align-items-center gap-1">
+                <i class="bi bi-calendar3"></i>
+                <span>{{item.dt_milestone}}</span>
+              </div>
+              <span class="badge bg-light text-dark font-monospace" style="font-size: 0.65rem;"> v{{ item.proj_ver }}</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex gap-1">
+            <button class="btn btn-outline-secondary btn-sm" style="padding: 1px 17px !important;" >
+              <i class="bi bi-pencil" style="font-size: 16px;"></i>
+            </button>
+            <button class="btn btn-outline-danger btn-sm" style="padding: 1px 17px !important;">
+              <i class="bi bi-trash" style="font-size: 16px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+      
+
+
+    </div>
+  </div>

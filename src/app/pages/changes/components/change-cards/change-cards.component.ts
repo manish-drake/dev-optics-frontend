@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-change-cards',
@@ -36,6 +37,17 @@ export class ChangeCardsComponent {
 }
 onDelete(id: number){
   this.changeDelete.emit(id);
+}
+previewImage(imageUrl: string): void {
+  Swal.fire({
+    title: 'Image Preview',
+    imageUrl: imageUrl,
+    showCloseButton: true,
+    showConfirmButton: false,
+    width: 'auto',
+    padding: '1em',
+    background: '#fff',
+  });
 }
 
 }

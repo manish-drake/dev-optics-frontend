@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MilestoneCardComponent } from "./components/milestone-card/milestone-card.component";
 
 @Component({
   selector: 'app-milestones',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule, MilestoneCardComponent],
   templateUrl: './milestones.component.html',
   styleUrl: './milestones.component.scss'
 })

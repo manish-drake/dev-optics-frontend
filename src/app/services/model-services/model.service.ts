@@ -128,4 +128,15 @@ export class ModelService {
     );
   }
 
+  // ================================== IMAGE UPLOAD API ================================== //
+
+
+
+   imageUpload(file: File): Observable<any> {
+    const url =`${this.BaseUrl}/changes/upload-image/`
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.httpClient.post<any>(url, formData);
+  }
+
 }
