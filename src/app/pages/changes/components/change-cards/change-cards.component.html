@@ -9,7 +9,18 @@
       >
         <h5 class="card-title mb-0">{{ item.change_title }}</h5>
         <div class="d-flex align-items-center gap-2">
-          <span class="badge bg-success me-2">{{ item.category }}</span>
+            @if(item.category == "bug"){
+            <span class="badge bg-danger me-2">{{ item.category }}</span>
+            } @else if(item.category == "breaking"){
+            <span class="badge bg-info me-2">{{ item.category }}</span>
+            }
+            @else if (item.category == "feature") {
+                <span class="badge bg-success me-2">{{ item.category }}</span>
+            }
+            @else {
+                <span class="badge bg-warning me-2">{{ item.category }}</span>
+            }
+          
 
           <!-- 3-dot dropdown -->
           <div class="dropdown">

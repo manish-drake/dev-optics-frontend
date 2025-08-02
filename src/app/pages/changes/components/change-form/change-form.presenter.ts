@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModelService } from '../../../../services/model-services/model.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environment/environment';
+import { incrementVersion } from '../../../../helper/auto-increment-version';
 
 @Component({
   selector: 'app-change-form-presenter',
@@ -17,6 +18,8 @@ import { environment } from '../../../../../environment/environment';
 export class ChangeFormPresenter implements OnInit {
 
   imageUrl: string | null = null;
+  categorySelected: boolean = false;
+  isUpdateMode: boolean = false;
 
   categoryList: string[] = [];
   appName: string[] = [];
@@ -36,7 +39,7 @@ export class ChangeFormPresenter implements OnInit {
     this.route.params.subscribe((params) => {
       this.changeId = params['id'];
       this.isEditMode = !!this.changeId;
-      if(this.isEditMode && this.changeId){
+      if (this.isEditMode && this.changeId) {
         this.modelService.getSingleChange(this.changeId).subscribe({
           next: (data) => {
             this.form.patchValue(data);
@@ -53,6 +56,38 @@ export class ChangeFormPresenter implements OnInit {
       }
     })
 
+
+    // Check if we are in edit mode
+    this.route.params.subscribe((params) => {
+      this.changeId = params['id'];
+      this.isEditMode = !!this.changeId;
+
+      if (this.isEditMode && this.changeId) {
+        this.modelService.getSingleChange(this.changeId).subscribe({
+          next: (data) => {
+            this.form.patchValue(data);
+            this.imageUrl = data.image_url;
+
+            // Don't lock category during update
+            this.form.get('category')?.enable();
+          },
+          error: (err) => console.log('Single data get error:', err)
+        });
+      } else {
+        // Only in create mode, lock category after selection
+        this.form.get('category')?.valueChanges.subscribe((selectedCategory) => {
+          if (!this.categorySelected && selectedCategory) {
+            this.categorySelected = true;
+            // this.form.get('category')?.disable();
+
+            const currentVersion = this.form.get('version')?.value || '0.0.0';
+            const newVersion = incrementVersion(currentVersion, selectedCategory);
+            this.form.get('version')?.setValue(newVersion);
+          }
+        });
+      }
+    });
+
   }
   private buildForm(): void {
     this.form = this.fb.group({
@@ -68,30 +103,30 @@ export class ChangeFormPresenter implements OnInit {
     })
   }
 
-  onImageFile(event: any){
+  onImageFile(event: any) {
     const file: File = event.target.files[0];
-        if (file) {
-          this.modelService.imageUpload(file).subscribe({
-            next: (response) => {
-              console.log('Upload successful:', response);
-              const fullUrl = `${environment.apiUrl}${response.url}`
-              this.imageUrl = fullUrl // assign returned URL to preview it
-              this.form.get('image_url')?.setValue(fullUrl);
-            },
-            error: (err) => {
-              console.error('Upload failed:', err);
-            },
-          });
-        }
+    if (file) {
+      this.modelService.imageUpload(file).subscribe({
+        next: (response) => {
+          console.log('Upload successful:', response);
+          const fullUrl = `${environment.apiUrl}${response.url}`
+          this.imageUrl = fullUrl // assign returned URL to preview it
+          this.form.get('image_url')?.setValue(fullUrl);
+        },
+        error: (err) => {
+          console.error('Upload failed:', err);
+        },
+      });
+    }
   }
 
   submit() {
-    if(this.form.invalid) return;
+    if (this.form.invalid) return;
     const changeData: ChangeModel = this.form.value;
 
-    if(this.isEditMode){
+    if (this.isEditMode) {
       this.modelService.updateChange(changeData.id, changeData).subscribe({
-        next: () =>{
+        next: () => {
           console.log('Update successfully')
           this.router.navigate(['/change']);
         },
@@ -99,7 +134,7 @@ export class ChangeFormPresenter implements OnInit {
       })
     } else {
       this.modelService.createChange(changeData).subscribe({
-        next:()=>{
+        next: () => {
           console.log('Created successfully');
           this.form.reset();
           this.router.navigate(['/change'])
