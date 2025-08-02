@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ModelService } from '../../../../services/model-services/model.service';
 
 @Component({
   selector: 'app-change-form',
@@ -12,19 +13,26 @@ import Swal from 'sweetalert2';
   styleUrl: './change-form.component.scss'
 })
 export class ChangeFormComponent {
+  @Input() imageUrl: string | null = null; 
 
   @Input() category: any;
   @Input() app: any;
   @Input() form !: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
   @Input() editMode: boolean = false;
+  @Output() file = new EventEmitter<any>()
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private modelService: ModelService) { }
 
   onSubmit(): void {
     if (this.form.valid) {
       this.formSubmit.emit();
     }
+  }
+
+  
+  onFileSelected(event: any): void {
+   this.file.emit(event)
   }
 
   onClose() {

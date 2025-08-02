@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { map, Observable } from 'rxjs';
-import { AppModel, ChangeModel, DeploymentModel,  MilestoneModel, VersionModel } from '../model-interface/interfaces';
+import { AppModel, ChangeModel, DeploymentModel,  ImageUploadResponse,  MilestoneModel, VersionModel } from '../model-interface/interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -120,6 +120,10 @@ export class ModelService {
     return this.httpClient.delete<ChangeModel>(`${this.BaseUrl}/changes/${id}`)
   }
 
+  deleteMilestone(id: number): Observable<MilestoneModel>{
+    return this.httpClient.delete<MilestoneModel>(`${this.BaseUrl}/milestones/${id}`)
+  }
+
   // ================================== Get only One Item API ================================== //
 
   getAppNames(): Observable<string[]> {
@@ -132,7 +136,7 @@ export class ModelService {
 
 
 
-   imageUpload(file: File): Observable<any> {
+   imageUpload(file: File): Observable<ImageUploadResponse> {
     const url =`${this.BaseUrl}/changes/upload-image/`
     const formData = new FormData();
     formData.append('file', file);

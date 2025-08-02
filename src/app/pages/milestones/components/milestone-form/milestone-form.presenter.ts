@@ -9,7 +9,8 @@ import { ModelService } from '../../../../services/model-services/model.service'
   selector: 'app-milestone-form-presenter',
   standalone: true,
   imports: [MilestoneFormComponent],
-  template: `<app-milestone-form></app-milestone-form>`,
+  template: `<app-milestone-form [form]="form" [editMode]="isEditMode"
+      (formSubmit)="submit()" ></app-milestone-form>`,
   styleUrl: './milestone-form.component.scss'
 })
 export class MilestoneFormPresenter {
@@ -53,7 +54,7 @@ export class MilestoneFormPresenter {
         goal: [''],
         dt_milestone: [''], 
         proj_ver: [''],
-        completed: [false]
+        complete: [false]
       })
     }
   

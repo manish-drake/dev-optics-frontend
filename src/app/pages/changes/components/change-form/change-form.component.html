@@ -1,7 +1,7 @@
 <div class="app-form-container">
   <div class="app-form-card shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="fw-bold mb-0">{{ editMode ? 'Update Log' : 'Create Log' }}</h5>
+      <h5 class="fw-bold mb-0">{{ editMode ? "Update Log" : "Create Log" }}</h5>
       <button
         type="button"
         class="btn-close"
@@ -15,28 +15,43 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <select class="form-select" formControlName="app" >
+        <select class="form-select" formControlName="app">
           @for(name of app; track name){
-            <option [value]="name">
-              {{name}}
-            </option>
+          <option [value]="name">
+            {{ name }}
+          </option>
           }
         </select>
       </div>
 
       <div class="mb-3">
         <label for="version" class="form-label">Version</label>
-        <input type="text" formControlName="version" class="form-control" id="version" />
+        <input
+          type="text"
+          formControlName="version"
+          class="form-control"
+          id="version"
+        />
       </div>
 
       <div class="mb-3">
         <label for="dtt_change" class="form-label">Date & Time</label>
-        <input type="datetime-local" formControlName="dtt_change" class="form-control" id="dtt_change" />
+        <input
+          type="datetime-local"
+          formControlName="dtt_change"
+          class="form-control"
+          id="dtt_change"
+        />
       </div>
 
       <div class="mb-3">
         <label for="change_title" class="form-label">Title</label>
-        <input type="text" formControlName="change_title" class="form-control" id="change_title" />
+        <input
+          type="text"
+          formControlName="change_title"
+          class="form-control"
+          id="change_title"
+        />
       </div>
 
       <div class="mb-3">
@@ -51,7 +66,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="category" class="form-label">category</label>
+        <label for="category" class="form-label">Category</label>
         <select class="form-select" id="category" formControlName="category">
           @for(item of category ; track item){
           <option [value]="item">
@@ -62,12 +77,28 @@
       </div>
       <div class="mb-3">
         <label for="dev" class="form-label">Contributors</label>
-        <input type="text" formControlName="dev" class="form-control" id="dev" />
+        <input
+          type="text"
+          formControlName="dev"
+          class="form-control"
+          id="dev"
+        />
       </div>
       <div class="mb-3">
         <label for="image_url" class="form-label">Image</label>
-        <input type="file" formControlName="image_url" class="form-control" id="image_url" />
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          class="form-control"
+          id="image_url"
+        />
       </div>
+
+      @if(imageUrl){
+      <div class="mt-2">
+        <img [src]="imageUrl" class="img-thumbnail" style="max-height: 200px" />
+      </div>
+      }
 
       <div class="d-flex justify-content-center gap-3">
         <button

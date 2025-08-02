@@ -63,3 +63,7 @@ export enum CategoryEnum {
 }
 
 
+export interface ImageUploadResponse{
+  filename: string,
+  url: string,
+}

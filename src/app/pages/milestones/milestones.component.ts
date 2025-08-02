@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MilestoneCardComponent } from "./components/milestone-card/milestone-card.component";
 
@@ -13,6 +13,11 @@ import { MilestoneCardComponent } from "./components/milestone-card/milestone-ca
 export class MilestonesComponent {
  
   @Input() datasource: any;
+  @Output() deleteMilestone = new EventEmitter<number>();
+
+  onDelete(id: number){
+   this.deleteMilestone.emit(id)
+  }
 
   getCompletedCount(): number {
     return this.datasource.filter((item: { complete: boolean; })=> item.complete === true).length;

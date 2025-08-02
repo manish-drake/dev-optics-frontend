@@ -13,15 +13,7 @@ import { VersionCardsComponent } from "./components/version-cards/version-cards.
 export class VersionsComponent {
   @Input() datasource: any;
   @Output() deleteVersion = new EventEmitter<number>();
-createVersion() {
-throw new Error('Method not implemented.');
-}
-editVersion() {
-throw new Error('Method not implemented.');
-}
-deployVersion() {
-throw new Error('Method not implemented.');
-}
+
 
 onDelete(id: number) {
    this.deleteVersion.emit(id);

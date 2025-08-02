@@ -4,16 +4,19 @@ import { CategoryEnum, ChangeModel } from '../../../../services/model-interface/
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModelService } from '../../../../services/model-services/model.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../../environment/environment';
 
 @Component({
   selector: 'app-change-form-presenter',
   standalone: true,
   imports: [ChangeFormComponent],
-  template: `<app-change-form [form]="form" [app]="appName"
+  template: `<app-change-form [form]="form" [app]="appName" [imageUrl]='imageUrl' (file)="onImageFile($event)"
    [editMode]="isEditMode" (formSubmit)="submit()" [category]="categoryList"></app-change-form>`,
   styleUrl: './change-form.component.scss'
 })
 export class ChangeFormPresenter implements OnInit {
+
+  imageUrl: string | null = null;
 
   categoryList: string[] = [];
   appName: string[] = [];
@@ -37,6 +40,7 @@ export class ChangeFormPresenter implements OnInit {
         this.modelService.getSingleChange(this.changeId).subscribe({
           next: (data) => {
             this.form.patchValue(data);
+            this.imageUrl = data.image_url;
           },
           error: (err) => console.log('Single data get error:', err)
         })
@@ -62,6 +66,23 @@ export class ChangeFormPresenter implements OnInit {
       dev: [''],
       image_url: ['']
     })
+  }
+
+  onImageFile(event: any){
+    const file: File = event.target.files[0];
+        if (file) {
+          this.modelService.imageUpload(file).subscribe({
+            next: (response) => {
+              console.log('Upload successful:', response);
+              const fullUrl = `${environment.apiUrl}${response.url}`
+              this.imageUrl = fullUrl // assign returned URL to preview it
+              this.form.get('image_url')?.setValue(fullUrl);
+            },
+            error: (err) => {
+              console.error('Upload failed:', err);
+            },
+          });
+        }
   }
 
   submit() {

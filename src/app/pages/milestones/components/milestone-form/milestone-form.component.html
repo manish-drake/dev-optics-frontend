@@ -17,26 +17,23 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       
       <div class="mb-3">
-        <label for="version" class="form-label">Milestone</label>
+        <label for="milestone" class="form-label">Milestone</label>
         <input
           type="text"
           formControlName="milestone"
           class="form-control"
-          id="version"
+          id="milestone"
           placeholder="Enter Milestone"
           autocomplete="off"
         />
       </div>
 
       <div class="mb-3">
-        <label for="version" class="form-label">Goal</label>
-        <input
-          type="text"
-          formControlName="goal"
-          class="form-control"
-          id="majorVersion"
-          autocomplete="off"
-        />
+        <label for="goal" class="form-label">Goal</label>
+        <textarea  formControlName="goal"
+          class="form-control" rows="4"
+          id="goal"
+          autocomplete="off"></textarea>
       </div>
 
      
@@ -46,31 +43,31 @@
           type="date"
           formControlName="dt_milestone"
           class="form-control"
-          id="version"
+          id="dt_milestone"
           autocomplete="off"
         />
       </div>
 
       <div class="mb-3">
-        <label for="description" class="form-label">Version</label>
+        <label for="proj_ver" class="form-label">Version</label>
         <input
           type="text"
-          formControlName="project_ver"
+          formControlName="proj_ver"
           class="form-control"
-          id="projectVersion"
+          id="proj_ver"
           autocomplete="off"
         />
       </div>
 
-      <div class="form-check mb-3">
+      <!-- <div class="form-check mb-3">
         <input
           type="checkbox"
           class="form-check-input"
           id="completed"
           formControlName="completed"
         />
-        <label class="form-check-label" for="current">Completed</label>
-      </div>
+        <label class="form-check-label" for="completed">Completed</label>
+      </div> -->
 
       <div class="d-flex justify-content-center gap-3">
         <button
