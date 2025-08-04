@@ -21,6 +21,7 @@ export class ChangeFormPresenter implements OnInit {
   categorySelected: boolean = false;
   isUpdateMode: boolean = false;
 
+  
   categoryList: string[] = [];
   appName: string[] = [];
   public form!: FormGroup;
@@ -32,14 +33,14 @@ export class ChangeFormPresenter implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder) { }
 
-  ngOnInit() {
+    ngOnInit() {
     this.categoryList = Object.values(CategoryEnum);
     this.buildForm();
 
     this.route.params.subscribe((params) => {
       this.changeId = params['id'];
       this.isEditMode = !!this.changeId;
-      if (this.isEditMode && this.changeId) {
+      if(this.isEditMode && this.changeId){
         this.modelService.getSingleChange(this.changeId).subscribe({
           next: (data) => {
             this.form.patchValue(data);
@@ -50,45 +51,16 @@ export class ChangeFormPresenter implements OnInit {
       }
     })
 
+  
+
     this.modelService.getAppNames().subscribe({
       next: (data) => {
         this.appName = data;
       }
     })
 
-
-    // Check if we are in edit mode
-    this.route.params.subscribe((params) => {
-      this.changeId = params['id'];
-      this.isEditMode = !!this.changeId;
-
-      if (this.isEditMode && this.changeId) {
-        this.modelService.getSingleChange(this.changeId).subscribe({
-          next: (data) => {
-            this.form.patchValue(data);
-            this.imageUrl = data.image_url;
-
-            // Don't lock category during update
-            this.form.get('category')?.enable();
-          },
-          error: (err) => console.log('Single data get error:', err)
-        });
-      } else {
-        // Only in create mode, lock category after selection
-        this.form.get('category')?.valueChanges.subscribe((selectedCategory) => {
-          if (!this.categorySelected && selectedCategory) {
-            this.categorySelected = true;
-            // this.form.get('category')?.disable();
-
-            const currentVersion = this.form.get('version')?.value || '0.0.0';
-            const newVersion = incrementVersion(currentVersion, selectedCategory);
-            this.form.get('version')?.setValue(newVersion);
-          }
-        });
-      }
-    });
-
   }
+
   private buildForm(): void {
     this.form = this.fb.group({
       id: [''],

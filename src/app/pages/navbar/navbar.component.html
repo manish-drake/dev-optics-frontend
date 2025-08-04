@@ -1,17 +1,6 @@
 <div class="d-flex justify-content-center align-items-center gap-5 p-3">
 
- <button
-
-    type="button"
-    class="btn"
-    [ngClass]="{
-      'btn-primary text-white': activeTab === 'Apps',
-      'btn-light': activeTab !== 'Apps'
-    }"
-    (click)="setActiveTab('Apps')"
-  >
-    Apps
-  </button>
+ 
 
   <button
 
@@ -25,6 +14,20 @@
   >
     Changes
   </button>
+  
+   <button
+
+    type="button"
+    class="btn"
+    [ngClass]="{
+      'btn-primary text-white': activeTab === 'deployment',
+      'btn-light': activeTab !== 'deployment'
+    }"
+    (click)="setActiveTab('deployment')"
+  >
+    Deployment
+  </button>
+
 
      <button
 
@@ -55,20 +58,20 @@
 
     
 
-   <button
+  
+ 
+  <button
 
     type="button"
     class="btn"
     [ngClass]="{
-      'btn-primary text-white': activeTab === 'deployment',
-      'btn-light': activeTab !== 'deployment'
+      'btn-primary text-white': activeTab === 'Apps',
+      'btn-light': activeTab !== 'Apps'
     }"
-    (click)="setActiveTab('deployment')"
+    (click)="setActiveTab('Apps')"
   >
-    Deployment
+    Apps
   </button>
-
- 
  
  
 </div>

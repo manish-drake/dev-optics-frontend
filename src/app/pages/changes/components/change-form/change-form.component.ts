@@ -13,7 +13,9 @@ import { ModelService } from '../../../../services/model-services/model.service'
   styleUrl: './change-form.component.scss'
 })
 export class ChangeFormComponent {
-  @Input() imageUrl: string | null = null; 
+  @Input() imageUrl: string | null = null;
+  contributors: string[] = ['Manish Verma', 'Neha Agrawal', 'Aryan Vyawahare', 'Vikas Rana'];
+  
 
   @Input() category: any;
   @Input() app: any;
@@ -30,9 +32,12 @@ export class ChangeFormComponent {
     }
   }
 
-  
+
+ 
+
+
   onFileSelected(event: any): void {
-   this.file.emit(event)
+    this.file.emit(event)
   }
 
   onClose() {

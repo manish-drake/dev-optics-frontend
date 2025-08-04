@@ -25,17 +25,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <select class="form-select" id="category" formControlName="category">
-          @for(item of category ; track item){
-          <option [value]="item">
-            {{ item | titlecase }}
-          </option>
-          }
-        </select>
-      </div>
-
-      <div class="mb-3">
         <label for="version" class="form-label">Version</label>
         <input
           type="text"
@@ -77,16 +66,28 @@
         ></textarea>
       </div>
 
-      
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" id="category" formControlName="category">
+          @for(item of category ; track item){
+          <option [value]="item">
+            {{ item | titlecase }}
+          </option>
+          }
+        </select>
+      </div>
+
       <div class="mb-3">
         <label for="dev" class="form-label">Contributors</label>
-        <input
-          type="text"
-          formControlName="dev"
-          class="form-control"
-          id="dev"
-        />
+        <select formControlName="dev" class="form-select">
+         @for(contributor of contributors; track contributor){
+          <option [value]="contributor">
+            {{ contributor }}
+          </option>
+         }
+        </select>
       </div>
+
       <div class="mb-3">
         <label for="image_url" class="form-label">Image</label>
         <input
