@@ -131,6 +131,11 @@ export class ModelService {
       map((apps) => apps.map(app => app.app))
     );
   }
+  getVersions(): Observable<string[]> {
+    return this.httpClient.get<VersionModel[]>(`${this.BaseUrl}/apps/`).pipe(
+      map((versions) => versions.map(version => version.version))
+    );
+  }
 
   // ================================== IMAGE UPLOAD API ================================== //
 

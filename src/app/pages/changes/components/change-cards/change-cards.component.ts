@@ -43,7 +43,7 @@ previewImage(imageUrl: string): void {
     imageUrl: imageUrl,
     showCloseButton: true,
     showConfirmButton: false,
-    width: '33%',
+    width: '18%',
     padding: '1em',
     background: '#fff',
   });

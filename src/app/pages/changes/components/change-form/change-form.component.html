@@ -15,7 +15,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <select class="form-select" formControlName="app">
+        <select class="form-select" formControlName="app" required="true">
           @for(name of app; track name){
           <option [value]="name">
             {{ name }}
@@ -77,16 +77,52 @@
         </select>
       </div>
 
-      <div class="mb-3">
-        <label for="dev" class="form-label">Contributors</label>
-        <select formControlName="dev" class="form-select">
-         @for(contributor of contributors; track contributor){
-          <option [value]="contributor">
-            {{ contributor }}
-          </option>
-         }
-        </select>
+   <div class="mb-3">
+  <label class="form-label">Contributors</label>
+
+  <div class="position-relative">
+    <!-- Fake select UI (styled like form-select) -->
+    <div
+      class="form-select"
+      (click)="toggleDropdown()"
+      style="cursor: pointer;"
+    >
+      {{
+        selectContributors.length
+          ? selectContributors.join(', ')
+          : 'Select contributors'
+      }}
+    </div>
+
+    <!-- Dropdown with checkboxes -->
+    <div
+      class="border position-absolute w-100 bg-white shadow-sm z-3"
+      *ngIf="dropdownOpen"
+      (click)="$event.stopPropagation()"
+    >
+      <div
+        *ngFor="let contributor of contributors"
+        class="form-check px-3 py-1"
+      >
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="contributor"
+          [value]="contributor"
+          (change)="onContributorChange($event)"
+          [checked]="selectContributors.includes(contributor)"
+        />
+        <label class="form-check-label" [for]="contributor">
+          {{ contributor }}
+        </label>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
       <div class="mb-3">
         <label for="image_url" class="form-label">Image</label>
@@ -112,7 +148,7 @@
         >
           Cancel
         </button>
-        <button type="submit" class="btn btn-primary px-4">Save</button>
+        <button type="submit" class="btn btn-primary px-4">{{ editMode ? 'Update' : 'Save'}}</button>
       </div>
     </form>
   </div>

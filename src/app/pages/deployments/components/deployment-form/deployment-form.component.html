@@ -10,7 +10,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <select class="form-select" formControlName="app">
+        <select class="form-select" formControlName="app" required="true">
           @for(name of app; track name){
           <option [value]="name">
             {{ name }}

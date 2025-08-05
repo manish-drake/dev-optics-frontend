@@ -10,7 +10,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <input type="text" formControlName="app" class="form-control" id="appName" placeholder="Enter application name" />
+        <input type="text" formControlName="app" class="form-control" id="appName" required="true" placeholder="Enter application name" />
       </div>
 
       <div class="mb-3">

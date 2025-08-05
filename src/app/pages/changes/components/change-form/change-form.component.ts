@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output
+} from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -10,21 +16,30 @@ import { ModelService } from '../../../../services/model-services/model.service'
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './change-form.component.html',
-  styleUrl: './change-form.component.scss'
+  styleUrl: './change-form.component.scss',
 })
 export class ChangeFormComponent {
   @Input() imageUrl: string | null = null;
-  contributors: string[] = ['Manish Verma', 'Neha Agrawal', 'Aryan Vyawahare', 'Vikas Rana'];
-  
-
+  @Input() selectContributors: string[] = [];
   @Input() category: any;
   @Input() app: any;
-  @Input() form !: FormGroup;
-  @Output() formSubmit = new EventEmitter<void>();
+  @Input() form!: FormGroup;
   @Input() editMode: boolean = false;
-  @Output() file = new EventEmitter<any>()
 
-  constructor(private router: Router, private modelService: ModelService) { }
+  @Output() formSubmit = new EventEmitter<void>();
+  @Output() ContributorToggle = new EventEmitter<Event>();
+  @Output() file = new EventEmitter<any>();
+
+  dropdownOpen = false;
+
+  contributors: string[] = [
+    'Manish Verma',
+    'Neha Agrawal',
+    'Aryan Vyawahare',
+    'Vikas Rana',
+  ];
+
+  constructor(private router: Router, private modelService: ModelService) {}
 
   onSubmit(): void {
     if (this.form.valid) {
@@ -32,12 +47,21 @@ export class ChangeFormComponent {
     }
   }
 
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
- 
+  onContributorChange(event: Event) {
+    this.ContributorToggle.emit(event);
+  }
 
+  // @HostListener('document:click')
+  // closeDropdown() {
+  //   this.dropdownOpen = false;
+  // }
 
   onFileSelected(event: any): void {
-    this.file.emit(event)
+    this.file.emit(event);
   }
 
   onClose() {
@@ -47,7 +71,7 @@ export class ChangeFormComponent {
   onCancel() {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to Discard changes",
+      text: 'You want to Discard changes',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',

@@ -9,6 +9,7 @@
       >
         <h5 class="card-title mb-0">{{ item.change_title }}</h5>
         <div class="d-flex align-items-center gap-2">
+          <span class="text-muted small">v{{ item.version }}</span>
             @if(item.category == "bug"){
             <span class="badge bg-danger me-2">{{ item.category }}</span>
             } @else if(item.category == "breaking"){

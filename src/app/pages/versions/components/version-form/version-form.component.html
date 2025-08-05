@@ -17,7 +17,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="appName" class="form-label">App Name</label>
-        <select class="form-select" formControlName="app">
+        <select class="form-select" formControlName="app" required="true">
           @for(name of app; track name){
           <option [value]="name">
             {{ name }}
@@ -34,43 +34,49 @@
           id="version"
           placeholder="Enter version"
           autocomplete="off"
+          readonly
         />
       </div>
 
-      @if(editMode){
-      <div class="mb-3">
-        <label for="version" class="form-label">Major version change</label>
+      <!-- @if(editMode){ -->
+       <div class="row mb-3">
+      <div class="col-md-4 mb-3">
+        <label for="version" class="form-label">Major</label>
         <input
-          type="text"
+          type="number"
           formControlName="delta_maj"
           class="form-control"
           id="majorVersion"
           autocomplete="off"
+          readonly
         />
       </div>
 
-      <div class="mb-3">
-        <label for="version" class="form-label">Minor version change</label>
+      <div class=" col-md-4 mb-3">
+        <label for="version" class="form-label">Minor</label>
         <input
-          type="text"
+          type="number"
           formControlName="delta_min"
           class="form-control"
           id="minorVersion"
           autocomplete="off"
+          readonly
         />
       </div>
 
-      <div class="mb-3">
-        <label for="version" class="form-label">Version</label>
+      <div class="col-md-4 mb-3">
+        <label for="version" class="form-label">Patch</label>
         <input
-          type="text"
+          type="number"
           formControlName="delta_pat"
           class="form-control"
           id="patchVersion"
           autocomplete="off"
+         readonly
         />
       </div>
-      }
+      </div>
+      <!-- } -->
       <div class="mb-3">
         <label for="dt_started" class="form-label">Date</label>
         <input

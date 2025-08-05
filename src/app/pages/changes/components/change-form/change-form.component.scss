@@ -59,3 +59,10 @@
     }
   }
 }
+
+.btn:hover {
+  background-color: transparent !important;
+  
+  color: inherit !important;
+  box-shadow: none !important;
+}
