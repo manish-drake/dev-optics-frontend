@@ -26,13 +26,20 @@
 
       <div class="mb-3">
         <label for="version" class="form-label">Version</label>
-        <input
+        <!-- <input
           type="text"
           formControlName="version"
           class="form-control"
           id="version"
           readonly
-        />
+        /> -->
+        <select class="form-select" formControlName="version" required="true">
+          @for(ver of versions; track ver){
+          <option [value]="ver">
+            {{ ver }}
+          </option>
+          }
+        </select>
       </div>
 
       <div class="mb-3">
@@ -42,6 +49,7 @@
           formControlName="dtt_change"
           class="form-control"
           id="dtt_change"
+          autocomplete="off"
         />
       </div>
 
@@ -52,6 +60,7 @@
           formControlName="change_title"
           class="form-control"
           id="change_title"
+          autocomplete="off"
         />
       </div>
 
@@ -119,9 +128,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
       <div class="mb-3">

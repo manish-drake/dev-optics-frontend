@@ -132,7 +132,7 @@ export class ModelService {
     );
   }
   getVersions(): Observable<string[]> {
-    return this.httpClient.get<VersionModel[]>(`${this.BaseUrl}/apps/`).pipe(
+    return this.httpClient.get<VersionModel[]>(`${this.BaseUrl}/versions/`).pipe(
       map((versions) => versions.map(version => version.version))
     );
   }
