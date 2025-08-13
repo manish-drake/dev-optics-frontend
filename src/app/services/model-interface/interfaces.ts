@@ -56,6 +56,7 @@ export interface MilestoneModel{
 }
 
 export enum CategoryEnum {
+  Tweaks = 'tweaks',
   Bug = 'bug',
   Feature = 'feature',
   Refactoring = 'refactoring',

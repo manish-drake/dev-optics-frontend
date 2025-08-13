@@ -44,7 +44,7 @@ export class AppsPresenter implements OnInit {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Delete'
-    }).then((result) => {
+    }).then((result: { isConfirmed: any; }) => {
       if (result.isConfirmed) {
         this.modelService.deleteApp(id).subscribe({
           next: (data) => {
