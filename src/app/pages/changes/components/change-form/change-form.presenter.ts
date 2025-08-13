@@ -17,6 +17,7 @@ import { environment } from '../../../../../environment/environment';
     <app-change-form
       [form]="form"
       [app]="appName"
+      [versions]="versions"
       [imageUrl]="imageUrl"
       [selectContributors]="selectedContributors"
       [editMode]="isEditMode"
@@ -81,6 +82,13 @@ export class ChangeFormPresenter implements OnInit {
         this.appName = appNames;
       },
     });
+
+    this.modelService.getVersions().subscribe({
+      next: (versions) => {
+        console.log('Available versions:', versions);
+        this.versions = versions;
+      }
+    })
   }
 
   onContributorChange(event: Event) {

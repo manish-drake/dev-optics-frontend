@@ -23,6 +23,7 @@ export class ChangeFormComponent {
   @Input() selectContributors: string[] = [];
   @Input() category: any;
   @Input() app: any;
+  @Input() versions: any;
   @Input() form!: FormGroup;
   @Input() editMode: boolean = false;
 
