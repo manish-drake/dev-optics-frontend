@@ -137,6 +137,12 @@ export class ModelService {
     );
   }
 
+  getMilestonesList(): Observable<string[]> {
+    return this.httpClient.get<MilestoneModel[]>(`${this.BaseUrl}/milestones/`).pipe(
+      map((milestones) => milestones.map(milestone => milestone.milestone))
+    );
+  }
+
   // ================================== IMAGE UPLOAD API ================================== //
 
 

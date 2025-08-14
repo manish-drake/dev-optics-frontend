@@ -9,7 +9,7 @@ import { DeploymentModel } from '../../../../services/model-interface/interfaces
   selector: 'app-deployment-form-presenter',
   standalone: true,
   imports: [DeploymentFormComponent],
-  template: `<app-deployment-form [form]="form" [app]="appName" [editMode]="isEditMode"
+  template: `<app-deployment-form [form]="form" [app]="appName" [milestone]="milestone" [editMode]="isEditMode"
       (formSubmit)="submit()"></app-deployment-form>`,
   styleUrl: './deployment-form.component.scss'
 })
@@ -19,6 +19,7 @@ export class DeploymentFormPresenter implements OnInit {
   public deployId: number | null = null;
   public isEditMode = false;
   public appName: string[] = [];
+  public milestone: string[] = [];
 
   constructor(
     private modelService: ModelService,
@@ -45,6 +46,12 @@ export class DeploymentFormPresenter implements OnInit {
      this.modelService.getAppNames().subscribe({
       next: (data) => {
         this.appName = data
+      }
+    })
+
+    this.modelService.getMilestonesList().subscribe({
+      next: (data) => {
+        this.milestone = data
       }
     })
 

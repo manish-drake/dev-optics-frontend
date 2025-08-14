@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class DeploymentFormComponent {
   @Input() app: any;
+  @Input() milestone: any;
  @Input() form!: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
   @Input() editMode: boolean = false;

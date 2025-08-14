@@ -19,6 +19,17 @@
         </select>
       </div>
 
+      <div class="mb-3">
+        <label for="milestone" class="form-label">Milestone</label>
+        <select class="form-select" formControlName="milestone" required="true">
+          @for(title of milestone; track title){
+          <option [value]="title">
+            {{ title }}
+          </option>
+          }
+        </select>
+      </div>
+
 
       <div class="mb-3">
         <label for="dtt_deploy" class="form-label">Date & Time</label>
@@ -47,6 +58,8 @@
         <button type="button" class="btn btn-secondary px-4" (click)="onCancel()">Cancel</button>
         <button type="submit" class="btn btn-primary px-4">{{editMode ? 'Update': 'Save'}} </button>
       </div>
+
+
     </form>
   </div>
 </div>
