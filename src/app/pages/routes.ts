@@ -9,12 +9,14 @@ import { DeploymentFormPresenter } from "./deployments/components/deployment-for
 import { VersionFormPresenter } from "./versions/components/version-form/version-form.presenter";
 import { MilestonesPresenter } from "./milestones/milestones.presenter";
 import { MilestoneFormPresenter } from "./milestones/components/milestone-form/milestone-form.presenter";
+import { ChangesDetailCardPresenter } from "./changes/components/changes-detail-card/changes-detail-card.presenter";
 
 export const PAGE_ROUTES: Route[] = [
     { path: 'Apps', component: AppsPresenter},
     { path: 'app-form', component: AppFormPresenter },
     { path: 'edit-app/:id', component: AppFormPresenter},
     { path: 'change', component: ChangesPresenter},
+    { path: 'change-detail-card', component: ChangesDetailCardPresenter},
     { path: 'change-form', component: ChangeFormPresenter},
     { path: 'edit-change/:id', component: ChangeFormPresenter},
     { path: 'deployment', component: DeploymentsPresenter},

@@ -1,0 +1,105 @@
+<!-- changes-detail-card.component.html -->
+<div class="issue-detail-container">
+  <div class="back-navigation">
+    <button class="back-btn" (click)="goBack()">← Back to Issues List</button>
+  </div>
+
+  <div class="issue-card">
+    <!-- Header -->
+    <div class="issue-header">
+      <div class="header-content">
+        <div class="title-section">
+          <div class="title-row">
+            <h1 class="issue-title">{{ issue.title }}</h1>
+            <span class="version-tag">v{{ issue.version }}</span>
+          </div>
+          <div class="badges-row">
+            <span class="status-badge" [ngClass]="getStatusColor(issue.status)">
+              <span class="status-icon">{{ getStatusIcon(issue.status) }}</span>
+              {{ issue.status }}
+            </span>
+            <span *ngIf="issue.priority" class="priority-text" [ngClass]="getPriorityColor(issue.priority)">
+              Priority: {{ issue.priority }}
+            </span>
+            <span class="issue-id">Issue #{{ issue.id }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="issue-content">
+      <!-- Description -->
+      <div class="section">
+        <h3 class="section-title">
+          <span class="section-icon">💬</span>
+          Description
+        </h3>
+        <div class="description-box">
+          <p class="description-text">{{ issue.description }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="issue.images && issue.images.length > 0" class="section">
+        <h3 class="section-title">
+          <span class="section-icon">🖼️</span>
+          Screenshots & Images ({{ issue.images.length }})
+        </h3>
+        <div class="images-grid">
+          <div *ngFor="let image of issue.images; let i = index" class="image-container">
+            <div class="image-wrapper">
+              <img 
+                [src]="image.url" 
+                [alt]="image.caption || 'Screenshot ' + (i + 1)"
+                class="screenshot"
+                
+              />
+              <div class="image-overlay" (click)="openImageModal(image.url)">
+                <button class="expand-btn">🔍</button>
+              </div>
+            </div>
+            <p *ngIf="image.caption" class="image-caption">{{ image.caption }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue Details Grid -->
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-icon">📁</span>
+          <div class="detail-content">
+            <span class="detail-label">App Name</span>
+            <p class="detail-value">{{ issue.appName }}</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-icon">👤</span>
+          <div class="detail-content">
+            <span class="detail-label">Developer</span>
+            <p class="detail-value">{{ issue.developer }}</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-icon">📅</span>
+          <div class="detail-content">
+            <span class="detail-label">Reported Date</span>
+            <p class="detail-value">{{ issue.date }}</p>
+          </div>
+        </div>
+
+      
+        </div>
+    </div>
+ 
+  </div>
+
+  <!-- Image Modal -->
+  <div *ngIf="isModalOpen" class="modal-backdrop" (click)="onModalBackdropClick($event)">
+    <div class="modal-content">
+      <button class="modal-close-btn" (click)="closeImageModal()">✕</button>
+      <img *ngIf="selectedImage" [src]="selectedImage" alt="Issue Screenshot" class="modal-image" />
+    </div>
+  </div>
+</div>
