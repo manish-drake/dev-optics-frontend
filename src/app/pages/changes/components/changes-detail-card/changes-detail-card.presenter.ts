@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangesDetailCardComponent } from "./changes-detail-card.component";
+import { ModelService } from '../../../../services/model-services/model.service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
-// Interface definitions
 export interface IssueImage {
   url: string;
   caption?: string;
@@ -11,7 +13,7 @@ export interface Issue {
   id: string;
   title: string;
   version: string;
-  status: 'bug' | 'fixed' | 'in-progress' | 'pending' | 'critical';
+  status: 'bug' | 'breaking' | 'feature' | 'refactoring';
   priority: 'low' | 'medium' | 'high' | 'critical';
   description: string;
   stepsToReproduce?: string[];
@@ -30,11 +32,13 @@ export interface Issue {
 @Component({
   selector: 'app-changes-detail-card-presenter',
   standalone: true,
-  imports: [ChangesDetailCardComponent],
-  template: `<app-changes-detail-card [issue]="issue"></app-changes-detail-card>`,
+  imports: [CommonModule, ChangesDetailCardComponent],
+  template: `<app-changes-detail-card *ngIf="ds"   [issue]="issue" [datasource]="ds"></app-changes-detail-card>`,
   styleUrls: ['./changes-detail-card.component.scss']
 })
 export class ChangesDetailCardPresenter implements OnInit {
+
+  ds: {};
 
 
   issue: Issue = {
@@ -52,26 +56,27 @@ This issue is affecting multiple users and preventing them from efficiently mana
     developer: "Aryan Vyawahare, Vikas Rana",
     date: "10/07/2025 01:00 pm",
     images: [
-      {
-        url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
-        caption: "Event Form - Team Info section showing the non-functional Import Roster button"
-      },
+   
       {
         url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-        caption: "Browser console showing JavaScript errors when Import Roster is clicked"
       },
-      {
-        url: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=600&fit=crop",
-        caption: "Expected roster import dialog (from working version)"
-      }
+     
     ],
 
   };
+  
 
-  constructor() { }
+  constructor(private modelService: ModelService, private route: ActivatedRoute) { 
+    this.ds = {};
+  }
 
+  logId: number = 0;
   ngOnInit(): void {
     this.loadIssueData();
+    this.route.params.subscribe((params)=> {
+      this.logId = params['id'];
+    this.getSingleChange(this.logId);
+  })
   }
 
   private loadIssueData(): void {
@@ -93,4 +98,17 @@ This issue is affecting multiple users and preventing them from efficiently mana
       notes: currentNotes + '\n\n' + `[${new Date().toLocaleString()}] ${note}`
     };
   }
+getSingleChange(id: number) {
+  this.modelService.getSingleChange(id).subscribe({
+    next: (data) => {
+      // console.log('Single Change DS:', data);
+      this.ds = data;
+      console.log('Single Change DS:', this.ds);
+    },
+    error: (err) => {
+      console.error('Error fetching change:', err);
+    }
+  });
+}
+
 }

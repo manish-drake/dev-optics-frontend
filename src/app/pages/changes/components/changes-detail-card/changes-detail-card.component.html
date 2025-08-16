@@ -10,18 +10,16 @@
       <div class="header-content">
         <div class="title-section">
           <div class="title-row">
-            <h1 class="issue-title">{{ issue.title }}</h1>
-            <span class="version-tag">v{{ issue.version }}</span>
+            <h1 class="issue-title">{{ datasource.change_title
+ }}</h1>
+            <span class="version-tag">v{{ datasource.version }}</span>
           </div>
+          
           <div class="badges-row">
-            <span class="status-badge" [ngClass]="getStatusColor(issue.status)">
-              <span class="status-icon">{{ getStatusIcon(issue.status) }}</span>
-              {{ issue.status }}
-            </span>
-            <span *ngIf="issue.priority" class="priority-text" [ngClass]="getPriorityColor(issue.priority)">
-              Priority: {{ issue.priority }}
-            </span>
-            <span class="issue-id">Issue #{{ issue.id }}</span>
+            <span class="status-badge" [ngClass]="getStatusColor(datasource.category)">
+    <span class="status-icon">{{ getStatusIcon(datasource.category) }}</span>
+    {{ datasource.category }}
+  </span>
           </div>
         </div>
       </div>
@@ -36,7 +34,7 @@
           Description
         </h3>
         <div class="description-box">
-          <p class="description-text">{{ issue.description }}</p>
+          <p class="description-text">{{ datasource.change_desc }}</p>
         </div>
       </div>
 
@@ -46,19 +44,9 @@
           Screenshots & Images ({{ issue.images.length }})
         </h3>
         <div class="images-grid">
-          <div *ngFor="let image of issue.images; let i = index" class="image-container">
-            <div class="image-wrapper">
-              <img 
-                [src]="image.url" 
-                [alt]="image.caption || 'Screenshot ' + (i + 1)"
-                class="screenshot"
-                
-              />
-              <div class="image-overlay" (click)="openImageModal(image.url)">
-                <button class="expand-btn">🔍</button>
-              </div>
-            </div>
-            <p *ngIf="image.caption" class="image-caption">{{ image.caption }}</p>
+          <div  class="image-container">
+           
+            <img *ngIf="datasource.image_url" [src]=" datasource.image_url" class="image-caption" />
           </div>
         </div>
       </div>
@@ -69,7 +57,7 @@
           <span class="detail-icon">📁</span>
           <div class="detail-content">
             <span class="detail-label">App Name</span>
-            <p class="detail-value">{{ issue.appName }}</p>
+            <p class="detail-value">{{ datasource.app }}</p>
           </div>
         </div>
 
@@ -77,7 +65,7 @@
           <span class="detail-icon">👤</span>
           <div class="detail-content">
             <span class="detail-label">Developer</span>
-            <p class="detail-value">{{ issue.developer }}</p>
+            <p class="detail-value">{{ datasource.dev }}</p>
           </div>
         </div>
 
@@ -85,7 +73,7 @@
           <span class="detail-icon">📅</span>
           <div class="detail-content">
             <span class="detail-label">Reported Date</span>
-            <p class="detail-value">{{ issue.date }}</p>
+            <p class="detail-value">{{ datasource.dtt_change }}</p>
           </div>
         </div>
 

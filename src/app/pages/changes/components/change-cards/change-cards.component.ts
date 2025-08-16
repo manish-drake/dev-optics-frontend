@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,13 @@ import Swal from 'sweetalert2';
   templateUrl: './change-cards.component.html',
   styleUrl: './change-cards.component.scss'
 })
+
 export class ChangeCardsComponent {
+navigateToDetail(id: number) {
+  this.router.navigate(['/change-detail-card', id]);
+}
+  constructor( private router: Router) { }
+
   @Input() datasource: any;
   @Output() changeDelete = new EventEmitter<number>()
 

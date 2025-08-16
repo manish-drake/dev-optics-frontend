@@ -8,23 +8,27 @@
     <hr />
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="appName" class="form-label">App Name</label>
-        <select class="form-select" formControlName="app" required="true">
-          @for(name of app; track name){
-          <option [value]="name">
-            {{ name }}
-          </option>
-          }
-        </select>
-      </div>
-
-      <div class="mb-3">
+     
+<div class="mb-3">
         <label for="milestone" class="form-label">Milestone</label>
         <select class="form-select" formControlName="milestone" required="true">
           @for(title of milestone; track title){
           <option [value]="title">
             {{ title }}
+          </option>
+          }
+        </select>
+      </div>
+
+
+
+
+       <div class="mb-3">
+        <label for="appName" class="form-label">App Name</label>
+        <select class="form-select" formControlName="app" required="true">
+          @for(name of app; track name){
+          <option [value]="name">
+            {{ name }}
           </option>
           }
         </select>
@@ -37,7 +41,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="version" class="form-label">version</label>
+        <label for="version" class="form-label">Version</label>
         <input type="text" formControlName="version" class="form-control" id="version" placeholder="Enter version" />
       </div>
 
@@ -49,10 +53,17 @@
         <label for="docker_tag" class="form-label">Docker tag</label>
         <input type="text" formControlName="docker_tag" class="form-control" id="docker_tag" placeholder="Enter docker tag" />
       </div>
-           <div class="mb-4">
-        <label for="change_log" class="form-label">Change log</label>
-        <input type="text" formControlName="change_log" class="form-control" id="change_log" placeholder="Enter changelog" />
-      </div>
+          <div class="mb-4">
+  <label for="change_log" class="form-label">Change log</label>
+  <textarea
+    formControlName="change_log"
+    class="form-control"
+    id="change_log"
+    placeholder="Enter changelog"
+    rows="4"
+  ></textarea>
+</div>
+
 
       <div class="d-flex justify-content-center gap-3">
         <button type="button" class="btn btn-secondary px-4" (click)="onCancel()">Cancel</button>

@@ -13,49 +13,55 @@ import { Router } from '@angular/router';
 })
 export class ChangesDetailCardComponent implements OnDestroy {
   @Input() issue!: Issue;
+  @Input() datasource: any;
   
   // Modal state
   selectedImage: string | null = null;
   isModalOpen: boolean = false;
   private originalBodyOverflow: string = '';
 
-  constructor( 
-  private router: Router) { }
+  constructor( private router: Router) { 
+    console.log('datasource:', this.datasource);
+  }
 
   // Status styling methods
   getStatusColor(status: string): string {
+
+
     const statusMap: { [key: string]: string } = {
       'bug': 'status-bug',
-      'fixed': 'status-fixed',
-      'in-progress': 'status-in-progress',
-      'pending': 'status-pending',
-      'critical': 'status-critical'
+      'feature': 'status-feature',
+      'tweaks': 'status-tweaks',
+      'refactoring': 'status-refactoring',
+      'breaking': 'status-breaking',
+     
     };
     return statusMap[status.toLowerCase()] || 'status-default';
+    
   }
 
   getStatusIcon(status: string): string {
     const iconMap: { [key: string]: string } = {
+      'tweaks': '🔧',
       'bug': '🐛',
-      'fixed': '✅',
-      'in-progress': '⏰',
-      'critical': '⚠️',
-      'pending': '🔄'
+      'feature': '✨',
+      'refactoring': '✅',
+      'breaking': '💥',
     };
     return iconMap[status.toLowerCase()] || '⚠️';
   }
 
-  getPriorityColor(priority: string | undefined): string {
-    if (!priority) return 'priority-default';
+  // getPriorityColor(priority: string | undefined): string {
+  //   if (!priority) return 'priority-default';
     
-    const priorityMap: { [key: string]: string } = {
-      'high': 'priority-high',
-      'medium': 'priority-medium',
-      'low': 'priority-low',
-      'critical': 'priority-critical'
-    };
-    return priorityMap[priority.toLowerCase()] || 'priority-default';
-  }
+  //   const priorityMap: { [key: string]: string } = {
+  //     'high': 'priority-high',
+  //     'medium': 'priority-medium',
+  //     'low': 'priority-low',
+  //     'critical': 'priority-critical'
+  //   };
+  //   return priorityMap[priority.toLowerCase()] || 'priority-default';
+  // }
 
   // Image modal methods
   openImageModal(imageSrc: string): void {
@@ -150,30 +156,8 @@ export class ChangesDetailCardComponent implements OnDestroy {
     console.warn('Failed to load image:', img.src);
   }
 
-  // Method to get severity level for styling
-  getSeverityLevel(): 'low' | 'medium' | 'high' | 'critical' {
-    if (this.issue.status === 'critical' || this.issue.priority === 'critical') {
-      return 'critical';
-    }
-    if (this.issue.priority === 'high') {
-      return 'high';
-    }
-    if (this.issue.priority === 'medium') {
-      return 'medium';
-    }
-    return 'low';
-  }
 
-  // Method to check if issue is overdue (example additional functionality)
-  isOverdue(): boolean {
-    // This would depend on your business logic
-    // For example, if bug status for more than 7 days
-    const issueDate = new Date(this.issue.date);
-    const now = new Date();
-    const daysDiff = (now.getTime() - issueDate.getTime()) / (1000 * 3600 * 24);
-    
-    return this.issue.status === 'bug' && daysDiff > 7;
-  }
+
   goBack(): void {
   this.router.navigate(['/change']); 
 }

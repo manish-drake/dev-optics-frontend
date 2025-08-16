@@ -16,7 +16,7 @@ export const PAGE_ROUTES: Route[] = [
     { path: 'app-form', component: AppFormPresenter },
     { path: 'edit-app/:id', component: AppFormPresenter},
     { path: 'change', component: ChangesPresenter},
-    { path: 'change-detail-card', component: ChangesDetailCardPresenter},
+    { path: 'change-detail-card/:id', component: ChangesDetailCardPresenter},
     { path: 'change-form', component: ChangeFormPresenter},
     { path: 'edit-change/:id', component: ChangeFormPresenter},
     { path: 'deployment', component: DeploymentsPresenter},
