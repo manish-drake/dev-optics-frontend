@@ -20,6 +20,10 @@
     <span class="status-icon">{{ getStatusIcon(datasource.category) }}</span>
     {{ datasource.category }}
   </span>
+            <!-- <span *ngIf="issue.priority" class="priority-text" [ngClass]="getPriorityColor(issue.priority)">
+              Priority: {{ issue.priority }}
+            </span> -->
+            <!-- <span class="issue-id">Issue #{{ issue.id }}</span> -->
           </div>
         </div>
       </div>

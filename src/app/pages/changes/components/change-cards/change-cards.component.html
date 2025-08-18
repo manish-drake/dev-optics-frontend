@@ -2,8 +2,8 @@
 <div class="row g-4">
   <!-- Repeatable Card -->
   @for(item of datasource; track item) {
-  <div class="col-12 col-md-6 col-lg-4">
-    <div class="card h-100 shadow-sm border-0 w-100">
+  <div class="col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm border-0">
       
       <!-- Card Header -->
       <div
@@ -18,11 +18,15 @@
           @if(item.category == "bug") {
             <span class="badge bg-danger me-2">{{ item.category }}</span>
           } @else if(item.category == "breaking") {
-            <span class="badge bg-info me-2">{{ item.category }}</span>
+            <span class="badge  bg-warning me-2">{{ item.category }}</span>
           } @else if (item.category == "feature") {
+            <span class="badge bg-primary me-2">{{ item.category }}</span>
+          } 
+           @else if (item.category == " refactoring") {
+                                     
             <span class="badge bg-success me-2">{{ item.category }}</span>
-          } @else {
-            <span class="badge bg-warning me-2">{{ item.category }}</span>
+          }@else {
+            <span class="badge bg-info me-2">{{ item.category }}</span>
           }
 
           <!-- 3-dot dropdown -->
