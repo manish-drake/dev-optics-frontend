@@ -74,7 +74,7 @@
 
     }
     @else{
-    @for(item of datasource; track $index){
+    
 
     <div class="col-md-4">
       <div class="card border-0 shadow-sm h-100">
@@ -82,9 +82,9 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <p class="text-muted small mb-1 fw-medium">Total Milestones</p>
-              
+              @for(item of datasource; track $index){
                <h4 class="fw-bold text-dark mb-0">{{ $index + 1 }}</h4>
-              
+              }
             </div>
             <div class="icon-wrapper bg-primary-subtle">
               <i class="bi bi-bullseye text-primary fs-5"></i>
@@ -130,7 +130,7 @@
         </div>
       </div>
     </div>
-    }}
+    }
   </div>
 
   <!-- Milestones List -->

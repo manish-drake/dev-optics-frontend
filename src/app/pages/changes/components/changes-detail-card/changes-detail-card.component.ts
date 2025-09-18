@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Issue } from './changes-detail-card.presenter';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 // import { Issue } from './changes-detail-card-presenter.component';
 
 @Component({
@@ -49,6 +50,22 @@ export class ChangesDetailCardComponent implements OnDestroy {
       'breaking': '💥',
     };
     return iconMap[status.toLowerCase()] || '⚠️';
+  }
+
+  
+  openFullImage(imageUrl: string) {
+    Swal.fire({
+      imageUrl: imageUrl,
+      imageAlt: 'Full Image',
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: '#000', // optional for dark background
+      width: 'auto', // makes image scale naturally
+      heightAuto: true,
+      customClass: {
+        popup: 'image-popup'
+      }
+    });
   }
 
   // getPriorityColor(priority: string | undefined): string {
