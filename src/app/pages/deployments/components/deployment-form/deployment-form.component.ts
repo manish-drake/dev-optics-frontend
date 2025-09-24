@@ -14,9 +14,11 @@ import Swal from 'sweetalert2';
 export class DeploymentFormComponent {
   @Input() app: any;
   @Input() milestone: any;
- @Input() form!: FormGroup;
+  @Input() form!: FormGroup;
   @Output() formSubmit = new EventEmitter<void>();
+  @Output() onLoadChangeLog = new EventEmitter<void>();
   @Input() editMode: boolean = false;
+  isLoadingChangeLog: boolean = false;
   constructor(private router: Router) { }
 
   onSubmit(): void {
@@ -24,25 +26,25 @@ export class DeploymentFormComponent {
       this.formSubmit.emit();
     }
   }
-  
-    onClose() {
-      this.router.navigate(['/deployment']);
-    }
-  
-    onCancel() {
-       Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to Discard changes",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/deployment']);
-            }
-          });
-    }
+
+  onClose() {
+    this.router.navigate(['/deployment']);
+  }
+
+  onCancel() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to Discard changes",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/deployment']);
+      }
+    });
+  }
 }

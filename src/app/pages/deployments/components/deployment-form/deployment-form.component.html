@@ -54,12 +54,19 @@
         <input type="text" formControlName="docker_tag" class="form-control" id="docker_tag" placeholder="Enter docker tag" />
       </div>
           <div class="mb-4">
-  <label for="change_log" class="form-label">Change log</label>
+  <div class="d-flex justify-content-between align-items-center">
+    <label for="change_log" class="form-label mb-0">Change log</label>
+    <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center" (click)="onLoadChangeLog.emit()" [disabled]="isLoadingChangeLog">
+      <span *ngIf="!isLoadingChangeLog" class="me-1">Load</span>
+      <span *ngIf="isLoadingChangeLog" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+      <span *ngIf="isLoadingChangeLog">Loading…</span>
+    </button>
+  </div>
   <textarea
     formControlName="change_log"
-    class="form-control"
+    class="form-control mt-2"
     id="change_log"
-    placeholder="Enter changelog"
+    placeholder="Enter changelog or click Load to fetch from server"
     rows="4"
   ></textarea>
 </div>
