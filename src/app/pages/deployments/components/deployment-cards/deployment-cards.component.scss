@@ -69,6 +69,7 @@
             font-family: "Monaco", "Menlo", monospace;
             background-color: #f3f4f6;
             padding: 0.25rem 0.5rem;
+            margin: 34px 13px;
             border-radius: 0.25rem;
             display: inline-block;
             font-size: 0.8rem;
@@ -129,6 +130,21 @@
       }
     }
   }
+}
+
+.truncate-text {
+  max-height: 3.6em; /* roughly 2 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* show 2 lines */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.truncate-text.expanded {
+  max-height: none; /* remove limit when expanded */
+  -webkit-line-clamp: unset;
 }
 
 // Responsive Design

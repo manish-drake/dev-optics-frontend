@@ -1,4 +1,43 @@
 // changes-detail-card.component.scss
+
+.swal2-popup.image-popup {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.swal2-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+}
+
+.images-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  width: 900px; 
+  height: 700px; 
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-caption {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
 .issue-detail-container {
   min-height: 100vh;
   background-color: #f3f4f6;

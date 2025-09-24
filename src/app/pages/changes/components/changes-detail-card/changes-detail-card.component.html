@@ -47,12 +47,17 @@
           <span class="section-icon">🖼️</span>
           Screenshots & Images ({{ issue.images.length }})
         </h3>
-        <div class="images-grid">
-          <div  class="image-container">
-           
-            <img *ngIf="datasource.image_url" [src]=" datasource.image_url" class="image-caption" />
-          </div>
-        </div>
+       <div class="images-grid">
+  <div class="image-container">
+    <img 
+      *ngIf="datasource.image_url"
+      [src]="datasource.image_url"
+      class="image-caption"
+      (click)="openFullImage(datasource.image_url)"
+    />
+  </div>
+</div>
+
       </div>
 
       <!-- Issue Details Grid -->
