@@ -46,6 +46,20 @@ export interface ChangeModel {
   id: number
 }
 
+export interface ChangeFilterOption {
+  label: string;
+  type: 'current' | 'version' | 'all';
+  app?: string;
+  version?: string;
+}
+
+export interface ChangeQueryParams {
+  current_only?: boolean;
+  archived?: boolean;
+  app?: string;
+  version?: string;
+}
+
 export interface MilestoneModel{
     milestone: string
     goal: string

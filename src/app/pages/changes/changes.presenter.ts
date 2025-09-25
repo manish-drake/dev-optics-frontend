@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangesComponent } from "./changes.component";
-import { ChangeModel } from '../../services/model-interface/interfaces';
+import { ChangeFilterOption, ChangeModel, ChangeQueryParams } from '../../services/model-interface/interfaces';
 import { ModelService } from '../../services/model-services/model.service';
 import Swal from 'sweetalert2';
 
@@ -8,26 +8,71 @@ import Swal from 'sweetalert2';
   selector: 'app-changes-presenter',
   standalone: true,
   imports: [ChangesComponent],
-  template: `<app-changes [datasource]="ds" (deleteChange)="deleteChangeById($event)"></app-changes>`,
+  template: `<app-changes [datasource]="ds" [filterOptions]="filterOptions" [selectedFilter]="selectedFilter" (filterChange)="onFilterChange($event)" (deleteChange)="deleteChangeById($event)"></app-changes>`,
   styleUrl: './changes.component.scss'
 })
 export class ChangesPresenter implements OnInit {
 
   ds: ChangeModel[] = [];
+  filterOptions: ChangeFilterOption[] = [];
+  selectedFilter: ChangeFilterOption | null = null;
 
   constructor(private modelService: ModelService) {}
 
   ngOnInit(){
-   this.loadChange()
+   this.loadFilterOptions()
   }
 
-  loadChange() {
-    this.modelService.getChange().subscribe({
+  loadFilterOptions() {
+    this.modelService.getChangeFilterOptions().subscribe({
+      next: (options) => {
+        this.filterOptions = options;
+        const defaultFilter = options.find((option) => option.type === 'current') ?? options[0] ?? null;
+        this.selectedFilter = defaultFilter;
+        if (defaultFilter) {
+          this.loadChange(defaultFilter);
+        } else {
+          this.loadChange();
+        }
+      },
+      error: () => {
+        this.filterOptions = [];
+        this.selectedFilter = null;
+        this.loadChange();
+      }
+    })
+  }
+
+  loadChange(filter?: ChangeFilterOption) {
+    const params = this.mapFilterToParams(filter);
+
+    this.modelService.getChange(params).subscribe({
       next: (data) => {
         this.ds = data
         console.log("Changes List DS:", this.ds)
       }
     })
+  }
+
+  onFilterChange(option: ChangeFilterOption) {
+    this.selectedFilter = option;
+    this.loadChange(option);
+  }
+
+  private mapFilterToParams(filter?: ChangeFilterOption): ChangeQueryParams | undefined {
+    if (!filter) {
+      return undefined;
+    }
+
+    if (filter.type === 'current') {
+      return { current_only: true, archived: false };
+    }
+
+    if (filter.type === 'version' && filter.app && filter.version) {
+      return { app: filter.app, version: filter.version };
+    }
+
+    return undefined;
   }
 
   deleteChangeById(id: number){
@@ -49,7 +94,11 @@ export class ChangesPresenter implements OnInit {
                        'The Change has been deleted.',
                        'success'
                      ).then(() => {
-                       location.reload(); // Reload the page after the alert is closed
+                       if (this.selectedFilter) {
+                         this.loadChange(this.selectedFilter);
+                       } else {
+                         this.loadChange();
+                       }
                      });
                    },
                    error: (err) => {

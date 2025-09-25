@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModelService } from '../../../../services/model-services/model.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VersionModel } from '../../../../services/model-interface/interfaces';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -77,17 +78,40 @@ export class VersionFormPresenter implements OnInit {
     if(this.isEditMode){
       this.modelService.updateVersion(versionData.id, versionData).subscribe({
         next: () => {
-          console.log('Updated successfully');
-          this.router.navigate(['/versions']);
+          Swal.fire({
+            icon: 'success',
+            title: 'Version updated',
+            text: 'The version was updated successfully.',
+          }).then(() => this.router.navigate(['/versions']))
         },
-        error: (err) => console.error('Update error:', err)
+        error: (err) => {
+          console.error('Update error:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Update failed',
+            text: err?.error?.detail ?? 'Something went wrong while updating the version.',
+          });
+        }
       });
     } else {
       this.modelService.createVersion(versionData).subscribe({
         next: () => {
-          console.log('Created successfully');
-          this.form.reset();
-          this.router.navigate(['/versions'])
+          Swal.fire({
+            icon: 'success',
+            title: 'Version created',
+            text: 'The version was created successfully.',
+          }).then(() => {
+            this.form.reset();
+            this.router.navigate(['/versions']);
+          });
+        },
+        error: (err) => {
+          console.error('Create error:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Creation failed',
+            text: err?.error?.detail ?? 'Something went wrong while updating the version.',
+          });
         }
       })
     }

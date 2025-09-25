@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { map, Observable } from 'rxjs';
-import { AppModel, ChangeModel, DeploymentModel,  ImageUploadResponse,  MilestoneModel, VersionModel } from '../model-interface/interfaces';
-import { HttpClient } from '@angular/common/http';
+import { AppModel, ChangeFilterOption, ChangeModel, ChangeQueryParams, DeploymentModel,  ImageUploadResponse,  MilestoneModel, VersionModel } from '../model-interface/interfaces';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +40,24 @@ export class ModelService {
     return this.httpClient.get<DeploymentModel>(`${this.BaseUrl}/deployments/${id}`)
   }
 
-  getChange(): Observable<ChangeModel[]> {
-    return this.httpClient.get<ChangeModel[]>(`${this.BaseUrl}/changes/`)
+  getChange(params?: ChangeQueryParams): Observable<ChangeModel[]> {
+    let httpParams = new HttpParams();
+
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          httpParams = httpParams.set(key, String(value));
+        }
+      });
+    }
+
+    const options = httpParams.keys().length ? { params: httpParams } : undefined;
+
+    return this.httpClient.get<ChangeModel[]>(`${this.BaseUrl}/changes/`, options)
+  }
+
+  getChangeFilterOptions(): Observable<ChangeFilterOption[]> {
+    return this.httpClient.get<ChangeFilterOption[]>(`${this.BaseUrl}/changes/filter-options`);
   }
 
   getSingleChange(id: number): Observable<ChangeModel> {

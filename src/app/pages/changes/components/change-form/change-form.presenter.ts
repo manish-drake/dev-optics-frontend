@@ -3,6 +3,7 @@ import { ChangeFormComponent } from './change-form.component';
 import {
   CategoryEnum,
   ChangeModel,
+  VersionModel,
 } from '../../../../services/model-interface/interfaces';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModelService } from '../../../../services/model-services/model.service';
@@ -43,6 +44,7 @@ export class ChangeFormPresenter implements OnInit {
   public changeId: number | null = null;
   public isEditMode = false;
   versions: string[] = [];
+  private allVersions: VersionModel[] = [];
 
   constructor(
     private modelService: ModelService,
@@ -54,6 +56,12 @@ export class ChangeFormPresenter implements OnInit {
   ngOnInit() {
     this.categoryList = Object.values(CategoryEnum);
     this.buildForm();
+
+    this.form
+      .get('app')
+      ?.valueChanges.subscribe((appName: string) => {
+        this.populateVersions(appName);
+      });
 
     this.route.params.subscribe((params) => {
       this.changeId = params['id'];
@@ -71,6 +79,8 @@ export class ChangeFormPresenter implements OnInit {
                 .split(',')
                 .map((c: string) => c.trim());
             }
+
+            this.populateVersions(data.app);
           },
           error: (err) => console.log('Single data get error:', err),
         });
@@ -83,12 +93,42 @@ export class ChangeFormPresenter implements OnInit {
       },
     });
 
-    this.modelService.getVersions().subscribe({
+    this.modelService.getVersion().subscribe({
       next: (versions) => {
-        console.log('Available versions:', versions);
-        this.versions = versions;
+        this.allVersions = versions;
+        this.populateVersions(this.form.get('app')?.value);
+      },
+    });
+  }
+
+  private populateVersions(appName: string | null | undefined) {
+    const versionControl = this.form.get('version');
+
+    if (!appName) {
+      this.versions = [];
+      if (versionControl?.value) {
+        versionControl.setValue('');
       }
-    })
+      return;
+    }
+
+    if (!this.allVersions.length) {
+      return;
+    }
+
+    const filteredVersions = this.allVersions
+      .filter((version) => version.app === appName && version.current)
+      .map((version) => version.version);
+
+    this.versions = filteredVersions;
+
+    if (
+      versionControl &&
+      versionControl.value &&
+      !filteredVersions.includes(versionControl.value)
+    ) {
+      versionControl.setValue('');
+    }
   }
 
   onContributorChange(event: Event) {

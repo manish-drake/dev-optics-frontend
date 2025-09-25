@@ -3,7 +3,10 @@ import { DeploymentFormComponent } from "./deployment-form.component";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModelService } from '../../../../services/model-services/model.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DeploymentModel } from '../../../../services/model-interface/interfaces';
+import {
+  DeploymentModel,
+  VersionModel,
+} from '../../../../services/model-interface/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 
@@ -17,6 +20,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class DeploymentFormPresenter implements OnInit {
   public isLoadingChangeLog = false;
+  private allVersions: VersionModel[] = [];
 
   loadChangeLog() {
     const app = this.form.get('app')?.value as string;
@@ -88,13 +92,23 @@ export class DeploymentFormPresenter implements OnInit {
   ngOnInit(): void {
 
     this.buildForm();
+    this.form
+      .get('app')
+      ?.valueChanges.subscribe((appName: string) => {
+        if (!appName) {
+          this.form.get('version')?.setValue('');
+          return;
+        }
+
+        this.populateCurrentVersion(appName);
+      });
     this.route.params.subscribe((params) => {
       this.deployId = params['id'];
       this.isEditMode = !!this.deployId;
       if (this.isEditMode && this.deployId) {
         this.modelService.getSingleDeploy(this.deployId).subscribe({
           next: (data) => {
-            this.form.patchValue(data);
+            this.form.patchValue(data, { emitEvent: false });
           },
           error: (err) => console.log('Single data get error:', err)
         })
@@ -113,6 +127,35 @@ export class DeploymentFormPresenter implements OnInit {
       }
     })
 
+    this.modelService.getVersion().subscribe({
+      next: (versions) => {
+        this.allVersions = versions;
+        const selectedApp = this.form.get('app')?.value;
+        const versionControl = this.form.get('version');
+
+        if (selectedApp && (!versionControl?.value || versionControl.value === '')) {
+          this.populateCurrentVersion(selectedApp);
+        }
+      }
+    })
+
+  }
+
+  private populateCurrentVersion(appName: string) {
+    if (!this.allVersions.length) {
+      return;
+    }
+
+    const versionControl = this.form.get('version');
+    if (!versionControl) {
+      return;
+    }
+
+    const currentVersion = this.allVersions.find(
+      (version) => version.app === appName && version.current
+    );
+
+    versionControl.setValue(currentVersion ? currentVersion.version : '');
   }
 
   private buildForm(): void {
