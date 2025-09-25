@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Issue } from './changes-detail-card.presenter';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 // import { Issue } from './changes-detail-card-presenter.component';
@@ -13,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./changes-detail-card.component.scss']
 })
 export class ChangesDetailCardComponent implements OnDestroy {
-  @Input() issue!: Issue;
+
   @Input() datasource: any;
   
   // Modal state
@@ -154,17 +153,17 @@ export class ChangesDetailCardComponent implements OnDestroy {
     document.body.removeChild(link);
   }
 
-  shareIssue(): void {
-    if (navigator.share) {
-      navigator.share({
-        title: this.issue.title,
-        text: `Issue #${this.issue.id}: ${this.issue.title}`,
-        url: window.location.href
-      });
-    } else {
-      this.copyIssueUrl();
-    }
-  }
+  // shareIssue(): void {
+  //   if (navigator.share) {
+  //     navigator.share({
+  //       title: this.issue.title,
+  //       text: `Issue #${this.issue.id}: ${this.issue.title}`,
+  //       url: window.location.href
+  //     });
+  //   } else {
+  //     this.copyIssueUrl();
+  //   }
+  // }
 
   // Method to handle image loading errors
   onImageError(event: Event): void {
